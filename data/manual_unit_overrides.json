@@ -17,6 +17,19 @@
         "source": "User-provided unit data"
       }
     ],
-    "provenance": "Manual override from user-provided specification; no unprovided cooling, sound, heating, or fan-curve values were inferred."
+    "provenance": "Manual override from user-provided specification. Cooling input, current, heating capacity, efficiency, weight, dimensions and nominal airflow are inherited from 53QDMT30-718 (see inherited_fields); no cooling, sound, heating or fan-curve points were inferred.",
+    "inherited_from": "53QDMT30-718",
+    "inherited_fields": {
+      "rated_cooling_input_w": 3515.0,
+      "cooling_current_a": 16.3,
+      "rated_heating_btuh": 31000.0,
+      "eer_btu_wh": 8.53,
+      "eer_ww": 2.5,
+      "cop_ww": 3.3,
+      "indoor_weight_kg": 41.0,
+      "indoor_dimensions_mm": "1140 × 270 × 775",
+      "nominal_airflow_cfm": 790,
+      "nominal_airflow_m3h": 1339
+    }
   }
 ]

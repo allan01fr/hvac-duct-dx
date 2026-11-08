@@ -32,10 +32,15 @@ The repository intentionally reports unresolved or unimplemented engineering top
 
 The requested `53QDMT30-708` unit is included in `hvac_equipment.sqlite` as a
 manual override. Its source record is documented in
-`data/manual_unit_overrides.json` and contains only the user-provided values:
+`data/manual_unit_overrides.json`. The user-provided values are:
 26,540 Btu/h, 220/1/50, 3/4 in gas × 3/8 in liquid piping, and 790 CFM at
-High speed and 0.16 in.wg. Unprovided cooling, heating, sound, and fan-curve
-values are intentionally not inferred.
+High speed and 0.16 in.wg. Cooling, heating, sound, and fan-curve performance
+points are intentionally not inferred.
+
+The remaining nameplate fields (cooling input power and current, heating
+capacity, EER, COP, indoor weight and dimensions, nominal airflow) are copied
+from `53QDMT30-718` and declared in the same file under `inherited_from` and
+`inherited_fields`, so the inheritance is explicit and reviewable.
 
 ## Pacote ductdx
 

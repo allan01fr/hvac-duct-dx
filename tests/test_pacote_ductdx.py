@@ -9,6 +9,7 @@ SUBPACOTES = ["ductdx", "ductdx.selecao", "ductdx.selecao.esp", "ductdx.selecao.
               "ductdx.selecao.familias", "ductdx.selecao.requisitos", "ductdx.selecao.resultado",
               "ductdx.selecao.catalogo", "ductdx.selecao.catalogo_prefixo", "ductdx.selecao.motor",
               "ductdx.catalogo", "ductdx.catalogo.esquema"]   # ampliado nas Tarefas 9, 11 e 14
+# ductdx.catalogo.fontes.* pode usar pandas/openpyxl (exceção à regra), por isso fica fora da lista acima.
 
 def test_pacote_importa_sem_gui_nem_pandas():
     codigo = ("import importlib, sys\n"
@@ -30,3 +31,14 @@ def test_report_builder_usa_a_mesma_verificacao_de_forro():
     from ductdx.selecao import forro
     assert report_builder.check_ceiling_void is forro.check_ceiling_void
     assert report_builder.parse_dims("890x536x753") == (890.0, 536.0, 753.0)
+
+
+def test_fontes_do_catalogo_usam_pandas_mas_nao_gui_nem_docx():
+    codigo = ("import importlib, sys\n"
+              "for m in ['ductdx.catalogo.fontes.qdmt', 'ductdx.catalogo.fontes.miraco',\n"
+              "          'ductdx.catalogo.fontes.rooftop', 'ductdx.catalogo.fontes.ajustes_manuais']:\n"
+              "    importlib.import_module(m)\n"
+              "print(sorted(m for m in sys.modules if m.split('.')[0] in {'PySide6', 'docx'}))")
+    saida = subprocess.run([sys.executable, "-c", codigo], cwd=RAIZ,
+                           capture_output=True, text=True, check=True).stdout.strip()
+    assert saida == "[]"
