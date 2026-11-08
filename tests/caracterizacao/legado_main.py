@@ -22,18 +22,3 @@ def carregar_busca_legada() -> type:
           "ui_shell": types.SimpleNamespace(refresh_stale_banner=lambda app: None)}
     exec(compile(ast.fix_missing_locations(ast.Module([classe], [])), "main.py", "exec"), ns)  # noqa: S102 - carga controlada do main.py do repo
     return ns["BuscaLegada"]
-
-
-NOMES_ESP = {"ESPInput", "ESPResult", "calculate_esp", "suggest_esp_from_cfm"}
-CONSTANTES_ESP = {"ESP_PRESETS", "ACCESSORIES_PRESSURE", "FITTINGS_PRESSURE", "FRICTION_PER_METER"}
-
-def carregar_esp() -> dict:
-    """Extrai, por AST, o cálculo de ESP do nível de módulo de main.py."""
-    arvore = ast.parse((RAIZ / "main.py").read_text(encoding="utf-8"))
-    corpo = [n for n in arvore.body
-             if (isinstance(n, ast.ClassDef | ast.FunctionDef) and n.name in NOMES_ESP)
-             or (isinstance(n, ast.Assign) and getattr(n.targets[0], "id", "") in CONSTANTES_ESP)]
-    ns = {}
-    exec("from dataclasses import dataclass, field", ns)  # noqa: S102 - import fixo
-    exec(compile(ast.Module(corpo, []), "main.py", "exec"), ns)  # noqa: S102 - carga controlada do main.py do repo
-    return {k: ns[k] for k in sorted(NOMES_ESP | CONSTANTES_ESP)}

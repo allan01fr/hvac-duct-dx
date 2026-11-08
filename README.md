@@ -36,3 +36,14 @@ manual override. Its source record is documented in
 26,540 Btu/h, 220/1/50, 3/4 in gas × 3/8 in liquid piping, and 790 CFM at
 High speed and 0.16 in.wg. Unprovided cooling, heating, sound, and fan-curve
 values are intentionally not inferred.
+
+## Pacote ductdx
+
+O motor de seleção vive no pacote `ductdx/`, sem dependência de GUI (`PySide6`), `pandas` ou `docx`. Instalação em modo editável:
+
+```bash
+python -m pip install -e .
+python -c "import ductdx.selecao"
+```
+
+Por enquanto contém `ductdx.selecao.esp` (cálculo de ESP) e `ductdx.selecao.forro` (verificação de forro). O carregamento do catálogo exige o extra `catalogo` (`pip install -e .[catalogo]`).

@@ -1,9 +1,10 @@
 # Caracterização do cálculo de ESP: congela o comportamento atual do main.py.
 import pytest
-from legado_main import carregar_esp
 from pytest import approx
 
-esp = carregar_esp()
+from ductdx.selecao import esp as _esp
+
+esp = {nome: getattr(_esp, nome) for nome in dir(_esp)}
 
 
 def test_calculate_esp_soma_atrito_conexoes_acessorios():
