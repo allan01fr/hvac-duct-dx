@@ -10,7 +10,13 @@ REFERENCIA = json.loads(
     (Path(__file__).parent / "referencia_selecao.json").read_text(encoding="utf-8"))
 
 
-@pytest.mark.parametrize("caso", CASOS, ids=lambda c: c["nome"])
+# Tabela por família não existe mais no esquema v2; o equivalente é
+# `test_banco_v1_da_mensagem_clara` (tests/catalogo/test_consultas_catalogo.py).
+CASOS_SO_LEGADO = {"rooftop_sem_ruido"}
+
+
+@pytest.mark.parametrize("caso", [c for c in CASOS if c["nome"] not in CASOS_SO_LEGADO],
+                         ids=lambda c: c["nome"])
 def test_selecao_igual_a_referencia(caso, tmp_path):
     banco = preparar_banco(caso_completo(caso)["banco"], tmp_path / "b.sqlite")
     assert executar_motor(caso, banco) == REFERENCIA["casos"][caso["nome"]]

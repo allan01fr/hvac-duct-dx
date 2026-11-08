@@ -6,7 +6,6 @@ from ductdx.selecao.catalogo import (
     PontoResfriamento,
     PontoVazao,
 )
-from ductdx.selecao.catalogo_prefixo import CatalogoPorPrefixo
 from ductdx.selecao.familias import (
     FAMILIAS,
     Familia,
@@ -27,7 +26,7 @@ from ductdx.selecao.resultado import ResultadoModelo, ResultadoSelecao
 
 __all__ = [
     "FAMILIAS", "FASES", "VELOCIDADES", "Catalogo", "CatalogoIndisponivel",
-    "CatalogoPorPrefixo", "Familia", "ModeloCatalogo", "ParametrosForro",
+    "Familia", "ModeloCatalogo", "ParametrosForro",
     "PontoResfriamento", "PontoVazao", "Requeridos", "Requisitos",
     "ResultadoModelo", "ResultadoSelecao", "aplicar_margens", "familia_por_codigo",
     "familia_por_rotulo", "resolver_velocidade", "selecionar",

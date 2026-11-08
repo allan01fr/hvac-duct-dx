@@ -1,15 +1,13 @@
 # Motor de seleção: margens, velocidade, validação das entradas e rastreabilidade.
-import sqlite3
-from contextlib import closing
 from pathlib import Path
 
 import pytest
 from pytest import approx
 
 import ductdx
+from ductdx.catalogo.consultas import abrir_catalogo
 from ductdx.selecao import (
     FAMILIAS,
-    CatalogoPorPrefixo,
     Requisitos,
     aplicar_margens,
     resolver_velocidade,
@@ -72,6 +70,11 @@ def test_familias_batem_com_os_rotulos_da_gui():
 
 def test_resultado_traz_versao_e_entradas(banco_padrao):
     req = Requisitos(24000, 18000, 800, 0.16)
-    with closing(sqlite3.connect(banco_padrao)) as con:
-        r = selecionar(CatalogoPorPrefixo(con), req, ["qdmt"])
-    assert (r.versao_motor, r.requisitos, r.versao_catalogo) == (ductdx.__version__, req, None)
+    catalogo = abrir_catalogo(banco_padrao)
+    try:
+        r = selecionar(catalogo, req, ["qdmt"])
+        versao = catalogo.versao()
+    finally:
+        catalogo.conn.close()
+    assert (r.versao_motor, r.requisitos) == (ductdx.__version__, req)
+    assert r.versao_catalogo == versao and len(versao) == 64

@@ -6,7 +6,8 @@ from pathlib import Path
 
 from casos_selecao import caso_completo
 
-from ductdx.selecao import CatalogoPorPrefixo, ParametrosForro, Requisitos, selecionar
+from ductdx.catalogo.consultas import abrir_catalogo
+from ductdx.selecao import ParametrosForro, Requisitos, selecionar
 
 RAIZ = Path(__file__).resolve().parents[2]
 
@@ -28,8 +29,6 @@ def preparar_banco(variante: str, destino: Path) -> Path:
             "DELETE FROM ponto_desempenho WHERE tipo IN ('vazao', 'resfriamento') AND modelo_id = "
             "(SELECT m.id FROM modelo_equipamento m JOIN familia f ON f.id = m.familia_id "
             "WHERE f.codigo = 'qdmt' AND m.modelo_sistema = '53QDMT12-718')")
-    elif variante == "sem_tabela_ruido_rooftop":
-        con.execute("DROP VIEW rooftop_sound_level")
     else:
         raise ValueError(variante)
     con.commit()
@@ -50,10 +49,10 @@ def executar_motor(caso: dict, banco: Path) -> dict:
                               dreno_m=c["forro_dreno"],
                               reprovar_se_nao_cabe=c["forro_reprovar"]))
     familia = c["familia"]
-    con = sqlite3.connect(banco)
+    catalogo = abrir_catalogo(banco)
     try:
-        resultado = selecionar(CatalogoPorPrefixo(con), req, [familia] if familia else None)
+        resultado = selecionar(catalogo, req, [familia] if familia else None)
     finally:
-        con.close()
+        catalogo.conn.close()
     linhas = [dict(zip(CAMPOS_LINHA, l.como_linha_legada())) for l in resultado.linhas]
     return json.loads(json.dumps({"linhas": linhas, "avisos": resultado.avisos}))

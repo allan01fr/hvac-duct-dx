@@ -7,8 +7,8 @@ RAIZ = Path(__file__).resolve().parents[1]
 PROIBIDOS = {"PySide6", "pandas", "docx"}
 SUBPACOTES = ["ductdx", "ductdx.selecao", "ductdx.selecao.esp", "ductdx.selecao.forro",
               "ductdx.selecao.familias", "ductdx.selecao.requisitos", "ductdx.selecao.resultado",
-              "ductdx.selecao.catalogo", "ductdx.selecao.catalogo_prefixo", "ductdx.selecao.motor",
-              "ductdx.catalogo", "ductdx.catalogo.esquema"]   # ampliado nas Tarefas 9, 11 e 14
+              "ductdx.selecao.catalogo", "ductdx.selecao.motor",
+              "ductdx.catalogo", "ductdx.catalogo.esquema", "ductdx.catalogo.consultas"]   # ampliado nas Tarefas 9, 11 e 14
 # ductdx.catalogo.fontes.* pode usar pandas/openpyxl (exceção à regra), por isso fica fora da lista acima.
 
 def test_pacote_importa_sem_gui_nem_pandas():

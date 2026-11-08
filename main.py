@@ -61,9 +61,10 @@ except ImportError:
 
 import report_builder
 import ui_shell
+from ductdx.catalogo.consultas import abrir_catalogo
 from ductdx.selecao import (
     FAMILIAS,
-    CatalogoPorPrefixo,
+    CatalogoIndisponivel,
     ParametrosForro,
     Requisitos,
     familia_por_rotulo,
@@ -525,7 +526,11 @@ class App(QMainWindow):
         self.ocr = None
         self.raw = ""
         self.selected_row = -1
-        self.catalogo = CatalogoPorPrefixo(self.conn)
+        try:
+            self.catalogo = abrir_catalogo(DB)
+        except CatalogoIndisponivel as e:
+            print(f"❌ {e}")
+            sys.exit(1)
         # ── [NEW] Selection Cart ──
         self.cart = {}  # {system_label: {model, catalog, loads...}}
         self._auto_system_n = 0
