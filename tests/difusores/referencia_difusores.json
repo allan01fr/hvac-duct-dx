@@ -1,0 +1,1896 @@
+{
+ "gerado_de": "diffuser_calculator.py@6605b3b",
+ "casos": {
+  "select_diffuser_800": {
+   "ok": {
+    "model": "CCD-20",
+    "size_label": "20\"",
+    "qty": 1,
+    "cfm_per_unit": 800.0,
+    "neck_velocity_fpm": 367.0,
+    "neck_area_ft2": 2.18,
+    "throw_t50_ft": 15.3,
+    "throw_t100_ft": 10.0,
+    "pressure_drop_inwg": 0.0567,
+    "nc_estimated": 20.0,
+    "spacing_max_ft": 0.0,
+    "wall_offset_ft": 0.0,
+    "warnings": [],
+    "kind": "round",
+    "nc_label": "<20",
+    "rows": 1,
+    "cols": 1,
+    "char_L_ft": 0.0,
+    "adpi_ratio": 0.0,
+    "adpi_ratio_min": 0.0,
+    "adpi_ok": true,
+    "score": -21.79,
+    "delta_t_f": null,
+    "delta_t_limit_f": 26.0,
+    "max_nc_limit": 35.0,
+    "pressure_ok": true,
+    "max_dp_limit_inwg": 0.2,
+    "rationale": {
+     "catalog_valid": true,
+     "noise_compliant": true,
+     "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+     "pressure_ok": true,
+     "pressure_basis": "catalog total-pressure loss; system losses not included",
+     "jet_collision_screening": "No geometric T50-envelope overlap flagged; collision not verified",
+     "t50_l_screening_pass": true,
+     "table4_airflow_compliant": true,
+     "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+     "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+     "terminal_velocity_status": "unresolved",
+     "rule_statuses": {
+      "R-TL-BAND": "supported",
+      "R-CHAR-L": "supported",
+      "R-MIN-THROW": "removed",
+      "R-NC": "engineer_decision",
+      "R-NECK-VEL": "engineer_decision",
+      "R-DP": "engineer_decision",
+      "R-AREA": "engineer_decision",
+      "R-TABLE4": "supported",
+      "R-TERMINAL-VELOCITY": "unresolved",
+      "R-NC-SPACING": "pending_verification",
+      "R-JET-COLLISION": "not_implemented",
+      "R-HEATING-OVERHEAD": "not_implemented",
+      "R-VAV": "not_implemented",
+      "R-THROW-OPPOSITE-WALLS": "supported",
+      "R-PROCEDURE": "supported",
+      "R-NC-BASIS": "unresolved"
+     },
+     "unresolved_or_unimplemented_rules": [
+      "R-TERMINAL-VELOCITY",
+      "R-NC-SPACING",
+      "R-JET-COLLISION",
+      "R-HEATING-OVERHEAD",
+      "R-VAV",
+      "R-NC-BASIS"
+     ],
+     "engineering_decision_rules": [
+      "R-NC",
+      "R-NECK-VEL",
+      "R-DP",
+      "R-AREA"
+     ],
+     "adpi_verified": false,
+     "source_refs": [
+      "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+      "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+      "ASHRAE Fundamentals 2017 Ch.20"
+     ],
+     "quantity": 1,
+     "summary": "Selected 1 × 20\" for T50/L screening pass; NC meets the configured limit; catalog total pressure meets the configured limit.",
+     "tl_band": [
+      0.7,
+      1.2
+     ],
+     "violated_rules": []
+    }
+   }
+  },
+  "select_diffuser_sala": {
+   "ok": {
+    "model": "CCD-24",
+    "size_label": "24\"",
+    "qty": 1,
+    "cfm_per_unit": 1200.0,
+    "neck_velocity_fpm": 382.2,
+    "neck_area_ft2": 3.14,
+    "throw_t50_ft": 19.1,
+    "throw_t100_ft": 13.3,
+    "pressure_drop_inwg": 0.0655,
+    "nc_estimated": 20.0,
+    "spacing_max_ft": 54.6,
+    "wall_offset_ft": 10.0,
+    "warnings": [
+     "T50/L screening 1.91–1.91 outside band 0.7-1.3"
+    ],
+    "kind": "round",
+    "nc_label": "<20",
+    "rows": 1,
+    "cols": 1,
+    "char_L_ft": 10.0,
+    "adpi_ratio": 1.91,
+    "adpi_ratio_min": 1.91,
+    "adpi_ok": false,
+    "score": 912.54,
+    "delta_t_f": 9.25925925925926,
+    "delta_t_limit_f": 26.0,
+    "max_nc_limit": 35.0,
+    "pressure_ok": true,
+    "max_dp_limit_inwg": 0.2,
+    "rationale": {
+     "catalog_valid": true,
+     "noise_compliant": true,
+     "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+     "pressure_ok": true,
+     "pressure_basis": "catalog total-pressure loss; system losses not included",
+     "jet_collision_screening": "No geometric T50-envelope overlap flagged; collision not verified",
+     "t50_l_screening_pass": false,
+     "table4_airflow_compliant": true,
+     "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+     "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+     "terminal_velocity_status": "unresolved",
+     "rule_statuses": {
+      "R-TL-BAND": "supported",
+      "R-CHAR-L": "supported",
+      "R-MIN-THROW": "removed",
+      "R-NC": "engineer_decision",
+      "R-NECK-VEL": "engineer_decision",
+      "R-DP": "engineer_decision",
+      "R-AREA": "engineer_decision",
+      "R-TABLE4": "supported",
+      "R-TERMINAL-VELOCITY": "unresolved",
+      "R-NC-SPACING": "pending_verification",
+      "R-JET-COLLISION": "not_implemented",
+      "R-HEATING-OVERHEAD": "not_implemented",
+      "R-VAV": "not_implemented",
+      "R-THROW-OPPOSITE-WALLS": "supported",
+      "R-PROCEDURE": "supported",
+      "R-NC-BASIS": "unresolved"
+     },
+     "unresolved_or_unimplemented_rules": [
+      "R-TERMINAL-VELOCITY",
+      "R-NC-SPACING",
+      "R-JET-COLLISION",
+      "R-HEATING-OVERHEAD",
+      "R-VAV",
+      "R-NC-BASIS"
+     ],
+     "engineering_decision_rules": [
+      "R-NC",
+      "R-NECK-VEL",
+      "R-DP",
+      "R-AREA"
+     ],
+     "adpi_verified": false,
+     "source_refs": [
+      "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+      "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+      "ASHRAE Fundamentals 2017 Ch.20"
+     ],
+     "quantity": 1,
+     "summary": "Selected 1 × 24\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+     "tl_band": [
+      0.7,
+      1.3
+     ],
+     "violated_rules": [
+      "R-TL-BAND"
+     ]
+    }
+   }
+  },
+  "rank_options_1500": {
+   "ok": [
+    {
+     "model": "CCD-20",
+     "size_label": "20\"",
+     "qty": 2,
+     "cfm_per_unit": 750.0,
+     "neck_velocity_fpm": 344.0,
+     "neck_area_ft2": 2.18,
+     "throw_t50_ft": 14.9,
+     "throw_t100_ft": 9.3,
+     "pressure_drop_inwg": 0.051,
+     "nc_estimated": 20.0,
+     "spacing_max_ft": 42.5,
+     "wall_offset_ft": 7.5,
+     "warnings": [
+      "T50/L screening 1.19–1.98 outside band 0.7-1.2"
+     ],
+     "kind": "round",
+     "nc_label": "<20",
+     "rows": 1,
+     "cols": 2,
+     "char_L_ft": 7.5,
+     "adpi_ratio": 1.98,
+     "adpi_ratio_min": 1.19,
+     "adpi_ok": false,
+     "score": 1027.14,
+     "delta_t_f": null,
+     "delta_t_limit_f": 23.0,
+     "max_nc_limit": 35.0,
+     "pressure_ok": true,
+     "max_dp_limit_inwg": 0.2,
+     "rationale": {
+      "catalog_valid": true,
+      "noise_compliant": true,
+      "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+      "pressure_ok": true,
+      "pressure_basis": "catalog total-pressure loss; system losses not included",
+      "jet_collision_screening": "No geometric T50-envelope overlap flagged; collision not verified",
+      "t50_l_screening_pass": false,
+      "table4_airflow_compliant": true,
+      "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+      "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+      "terminal_velocity_status": "unresolved",
+      "rule_statuses": {
+       "R-TL-BAND": "supported",
+       "R-CHAR-L": "supported",
+       "R-MIN-THROW": "removed",
+       "R-NC": "engineer_decision",
+       "R-NECK-VEL": "engineer_decision",
+       "R-DP": "engineer_decision",
+       "R-AREA": "engineer_decision",
+       "R-TABLE4": "supported",
+       "R-TERMINAL-VELOCITY": "unresolved",
+       "R-NC-SPACING": "pending_verification",
+       "R-JET-COLLISION": "not_implemented",
+       "R-HEATING-OVERHEAD": "not_implemented",
+       "R-VAV": "not_implemented",
+       "R-THROW-OPPOSITE-WALLS": "supported",
+       "R-PROCEDURE": "supported",
+       "R-NC-BASIS": "unresolved"
+      },
+      "unresolved_or_unimplemented_rules": [
+       "R-TERMINAL-VELOCITY",
+       "R-NC-SPACING",
+       "R-JET-COLLISION",
+       "R-HEATING-OVERHEAD",
+       "R-VAV",
+       "R-NC-BASIS"
+      ],
+      "engineering_decision_rules": [
+       "R-NC",
+       "R-NECK-VEL",
+       "R-DP",
+       "R-AREA"
+      ],
+      "adpi_verified": false,
+      "source_refs": [
+       "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+       "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+       "ASHRAE Fundamentals 2017 Ch.20"
+      ],
+      "quantity": 2,
+      "summary": "Selected 2 × 20\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+      "tl_band": [
+       0.7,
+       1.2
+      ],
+      "violated_rules": [
+       "R-TL-BAND"
+      ]
+     }
+    },
+    {
+     "model": "CCD-18",
+     "size_label": "18\"",
+     "qty": 2,
+     "cfm_per_unit": 750.0,
+     "neck_velocity_fpm": 423.7,
+     "neck_area_ft2": 1.77,
+     "throw_t50_ft": 14.5,
+     "throw_t100_ft": 9.2,
+     "pressure_drop_inwg": 0.0591,
+     "nc_estimated": 20.0,
+     "spacing_max_ft": 41.4,
+     "wall_offset_ft": 7.5,
+     "warnings": [
+      "T50/L screening 1.16–1.93 outside band 0.7-1.2"
+     ],
+     "kind": "round",
+     "nc_label": "<20",
+     "rows": 1,
+     "cols": 2,
+     "char_L_ft": 7.5,
+     "adpi_ratio": 1.93,
+     "adpi_ratio_min": 1.16,
+     "adpi_ok": false,
+     "score": 1011.85,
+     "delta_t_f": null,
+     "delta_t_limit_f": 23.0,
+     "max_nc_limit": 35.0,
+     "pressure_ok": true,
+     "max_dp_limit_inwg": 0.2,
+     "rationale": {
+      "catalog_valid": true,
+      "noise_compliant": true,
+      "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+      "pressure_ok": true,
+      "pressure_basis": "catalog total-pressure loss; system losses not included",
+      "jet_collision_screening": "No geometric T50-envelope overlap flagged; collision not verified",
+      "t50_l_screening_pass": false,
+      "table4_airflow_compliant": true,
+      "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+      "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+      "terminal_velocity_status": "unresolved",
+      "rule_statuses": {
+       "R-TL-BAND": "supported",
+       "R-CHAR-L": "supported",
+       "R-MIN-THROW": "removed",
+       "R-NC": "engineer_decision",
+       "R-NECK-VEL": "engineer_decision",
+       "R-DP": "engineer_decision",
+       "R-AREA": "engineer_decision",
+       "R-TABLE4": "supported",
+       "R-TERMINAL-VELOCITY": "unresolved",
+       "R-NC-SPACING": "pending_verification",
+       "R-JET-COLLISION": "not_implemented",
+       "R-HEATING-OVERHEAD": "not_implemented",
+       "R-VAV": "not_implemented",
+       "R-THROW-OPPOSITE-WALLS": "supported",
+       "R-PROCEDURE": "supported",
+       "R-NC-BASIS": "unresolved"
+      },
+      "unresolved_or_unimplemented_rules": [
+       "R-TERMINAL-VELOCITY",
+       "R-NC-SPACING",
+       "R-JET-COLLISION",
+       "R-HEATING-OVERHEAD",
+       "R-VAV",
+       "R-NC-BASIS"
+      ],
+      "engineering_decision_rules": [
+       "R-NC",
+       "R-NECK-VEL",
+       "R-DP",
+       "R-AREA"
+      ],
+      "adpi_verified": false,
+      "source_refs": [
+       "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+       "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+       "ASHRAE Fundamentals 2017 Ch.20"
+      ],
+      "quantity": 2,
+      "summary": "Selected 2 × 18\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+      "tl_band": [
+       0.7,
+       1.2
+      ],
+      "violated_rules": [
+       "R-TL-BAND"
+      ]
+     }
+    },
+    {
+     "model": "CCD-16",
+     "size_label": "16\"",
+     "qty": 2,
+     "cfm_per_unit": 750.0,
+     "neck_velocity_fpm": 535.7,
+     "neck_area_ft2": 1.4,
+     "throw_t50_ft": 15.7,
+     "throw_t100_ft": 9.7,
+     "pressure_drop_inwg": 0.1181,
+     "nc_estimated": 21.8,
+     "spacing_max_ft": 44.9,
+     "wall_offset_ft": 7.5,
+     "warnings": [
+      "T50/L screening 1.26–2.10 outside band 0.7-1.2"
+     ],
+     "kind": "round",
+     "nc_label": "22",
+     "rows": 1,
+     "cols": 2,
+     "char_L_ft": 7.5,
+     "adpi_ratio": 2.1,
+     "adpi_ratio_min": 1.26,
+     "adpi_ok": false,
+     "score": 1063.98,
+     "delta_t_f": null,
+     "delta_t_limit_f": 23.0,
+     "max_nc_limit": 35.0,
+     "pressure_ok": true,
+     "max_dp_limit_inwg": 0.2,
+     "rationale": {
+      "catalog_valid": true,
+      "noise_compliant": true,
+      "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+      "pressure_ok": true,
+      "pressure_basis": "catalog total-pressure loss; system losses not included",
+      "jet_collision_screening": "No geometric T50-envelope overlap flagged; collision not verified",
+      "t50_l_screening_pass": false,
+      "table4_airflow_compliant": true,
+      "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+      "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+      "terminal_velocity_status": "unresolved",
+      "rule_statuses": {
+       "R-TL-BAND": "supported",
+       "R-CHAR-L": "supported",
+       "R-MIN-THROW": "removed",
+       "R-NC": "engineer_decision",
+       "R-NECK-VEL": "engineer_decision",
+       "R-DP": "engineer_decision",
+       "R-AREA": "engineer_decision",
+       "R-TABLE4": "supported",
+       "R-TERMINAL-VELOCITY": "unresolved",
+       "R-NC-SPACING": "pending_verification",
+       "R-JET-COLLISION": "not_implemented",
+       "R-HEATING-OVERHEAD": "not_implemented",
+       "R-VAV": "not_implemented",
+       "R-THROW-OPPOSITE-WALLS": "supported",
+       "R-PROCEDURE": "supported",
+       "R-NC-BASIS": "unresolved"
+      },
+      "unresolved_or_unimplemented_rules": [
+       "R-TERMINAL-VELOCITY",
+       "R-NC-SPACING",
+       "R-JET-COLLISION",
+       "R-HEATING-OVERHEAD",
+       "R-VAV",
+       "R-NC-BASIS"
+      ],
+      "engineering_decision_rules": [
+       "R-NC",
+       "R-NECK-VEL",
+       "R-DP",
+       "R-AREA"
+      ],
+      "adpi_verified": false,
+      "source_refs": [
+       "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+       "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+       "ASHRAE Fundamentals 2017 Ch.20"
+      ],
+      "quantity": 2,
+      "summary": "Selected 2 × 16\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+      "tl_band": [
+       0.7,
+       1.2
+      ],
+      "violated_rules": [
+       "R-TL-BAND"
+      ]
+     }
+    },
+    {
+     "model": "CCD-14",
+     "size_label": "14\"",
+     "qty": 2,
+     "cfm_per_unit": 750.0,
+     "neck_velocity_fpm": 700.9,
+     "neck_area_ft2": 1.07,
+     "throw_t50_ft": 17.0,
+     "throw_t100_ft": 11.0,
+     "pressure_drop_inwg": 0.1564,
+     "nc_estimated": 29.0,
+     "spacing_max_ft": 48.6,
+     "wall_offset_ft": 7.5,
+     "warnings": [
+      "T50/L screening 1.36–2.27 outside band 0.7-1.2"
+     ],
+     "kind": "round",
+     "nc_label": "29",
+     "rows": 1,
+     "cols": 2,
+     "char_L_ft": 7.5,
+     "adpi_ratio": 2.27,
+     "adpi_ratio_min": 1.36,
+     "adpi_ok": false,
+     "score": 1118.49,
+     "delta_t_f": null,
+     "delta_t_limit_f": 23.0,
+     "max_nc_limit": 35.0,
+     "pressure_ok": true,
+     "max_dp_limit_inwg": 0.2,
+     "rationale": {
+      "catalog_valid": true,
+      "noise_compliant": true,
+      "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+      "pressure_ok": true,
+      "pressure_basis": "catalog total-pressure loss; system losses not included",
+      "jet_collision_screening": "No geometric T50-envelope overlap flagged; collision not verified",
+      "t50_l_screening_pass": false,
+      "table4_airflow_compliant": true,
+      "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+      "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+      "terminal_velocity_status": "unresolved",
+      "rule_statuses": {
+       "R-TL-BAND": "supported",
+       "R-CHAR-L": "supported",
+       "R-MIN-THROW": "removed",
+       "R-NC": "engineer_decision",
+       "R-NECK-VEL": "engineer_decision",
+       "R-DP": "engineer_decision",
+       "R-AREA": "engineer_decision",
+       "R-TABLE4": "supported",
+       "R-TERMINAL-VELOCITY": "unresolved",
+       "R-NC-SPACING": "pending_verification",
+       "R-JET-COLLISION": "not_implemented",
+       "R-HEATING-OVERHEAD": "not_implemented",
+       "R-VAV": "not_implemented",
+       "R-THROW-OPPOSITE-WALLS": "supported",
+       "R-PROCEDURE": "supported",
+       "R-NC-BASIS": "unresolved"
+      },
+      "unresolved_or_unimplemented_rules": [
+       "R-TERMINAL-VELOCITY",
+       "R-NC-SPACING",
+       "R-JET-COLLISION",
+       "R-HEATING-OVERHEAD",
+       "R-VAV",
+       "R-NC-BASIS"
+      ],
+      "engineering_decision_rules": [
+       "R-NC",
+       "R-NECK-VEL",
+       "R-DP",
+       "R-AREA"
+      ],
+      "adpi_verified": false,
+      "source_refs": [
+       "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+       "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+       "ASHRAE Fundamentals 2017 Ch.20"
+      ],
+      "quantity": 2,
+      "summary": "Selected 2 × 14\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+      "tl_band": [
+       0.7,
+       1.2
+      ],
+      "violated_rules": [
+       "R-TL-BAND"
+      ]
+     }
+    },
+    {
+     "model": "CCD-16",
+     "size_label": "16\"",
+     "qty": 3,
+     "cfm_per_unit": 500.0,
+     "neck_velocity_fpm": 357.1,
+     "neck_area_ft2": 1.4,
+     "throw_t50_ft": 12.7,
+     "throw_t100_ft": 8.1,
+     "pressure_drop_inwg": 0.0613,
+     "nc_estimated": 20.0,
+     "spacing_max_ft": 36.3,
+     "wall_offset_ft": 5.0,
+     "warnings": [
+      "T50/L screening 1.02–2.54 outside band 0.7-1.2"
+     ],
+     "kind": "round",
+     "nc_label": "<20",
+     "rows": 1,
+     "cols": 3,
+     "char_L_ft": 5.0,
+     "adpi_ratio": 2.54,
+     "adpi_ratio_min": 1.02,
+     "adpi_ok": false,
+     "score": 1230.88,
+     "delta_t_f": null,
+     "delta_t_limit_f": 23.0,
+     "max_nc_limit": 35.0,
+     "pressure_ok": true,
+     "max_dp_limit_inwg": 0.2,
+     "rationale": {
+      "catalog_valid": true,
+      "noise_compliant": true,
+      "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+      "pressure_ok": true,
+      "pressure_basis": "catalog total-pressure loss; system losses not included",
+      "jet_collision_screening": "No geometric T50-envelope overlap flagged; collision not verified",
+      "t50_l_screening_pass": false,
+      "table4_airflow_compliant": true,
+      "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+      "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+      "terminal_velocity_status": "unresolved",
+      "rule_statuses": {
+       "R-TL-BAND": "supported",
+       "R-CHAR-L": "supported",
+       "R-MIN-THROW": "removed",
+       "R-NC": "engineer_decision",
+       "R-NECK-VEL": "engineer_decision",
+       "R-DP": "engineer_decision",
+       "R-AREA": "engineer_decision",
+       "R-TABLE4": "supported",
+       "R-TERMINAL-VELOCITY": "unresolved",
+       "R-NC-SPACING": "pending_verification",
+       "R-JET-COLLISION": "not_implemented",
+       "R-HEATING-OVERHEAD": "not_implemented",
+       "R-VAV": "not_implemented",
+       "R-THROW-OPPOSITE-WALLS": "supported",
+       "R-PROCEDURE": "supported",
+       "R-NC-BASIS": "unresolved"
+      },
+      "unresolved_or_unimplemented_rules": [
+       "R-TERMINAL-VELOCITY",
+       "R-NC-SPACING",
+       "R-JET-COLLISION",
+       "R-HEATING-OVERHEAD",
+       "R-VAV",
+       "R-NC-BASIS"
+      ],
+      "engineering_decision_rules": [
+       "R-NC",
+       "R-NECK-VEL",
+       "R-DP",
+       "R-AREA"
+      ],
+      "adpi_verified": false,
+      "source_refs": [
+       "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+       "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+       "ASHRAE Fundamentals 2017 Ch.20"
+      ],
+      "quantity": 3,
+      "summary": "Selected 3 × 16\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+      "tl_band": [
+       0.7,
+       1.2
+      ],
+      "violated_rules": [
+       "R-TL-BAND"
+      ]
+     }
+    }
+   ]
+  },
+  "layout_retangulo": {
+   "ok": {
+    "success": false,
+    "geometry": {
+     "vertices": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       6.0,
+       0.0
+      ],
+      [
+       6.0,
+       5.0
+      ],
+      [
+       0.0,
+       5.0
+      ]
+     ],
+     "height_m": 3.0,
+     "closed": true,
+     "closure_gap_m": 0.0,
+     "input_errors": []
+    },
+    "requested_quantity": 1,
+    "recommended_quantity": 1,
+    "placed_quantity": 1,
+    "required_cfm": 600,
+    "actual_total_cfm": 600,
+    "selected_model": {
+     "model": "CCD-18",
+     "size_label": "18\"",
+     "qty": 1,
+     "cfm_per_unit": 600.0,
+     "neck_velocity_fpm": 339.0,
+     "neck_area_ft2": 1.77,
+     "throw_t50_ft": 13.4,
+     "throw_t100_ft": 8.4,
+     "pressure_drop_inwg": 0.0404,
+     "nc_estimated": 20.0,
+     "spacing_max_ft": 38.3,
+     "wall_offset_ft": 8.2,
+     "warnings": [
+      "T50/L screening 1.36–1.63 outside band 0.7-1.3"
+     ],
+     "kind": "round",
+     "nc_label": "<20",
+     "rows": 1,
+     "cols": 1,
+     "char_L_ft": 8.2,
+     "adpi_ratio": 1.63,
+     "adpi_ratio_min": 1.36,
+     "adpi_ok": false,
+     "score": 874.92,
+     "delta_t_f": 15.432098765432098,
+     "delta_t_limit_f": 25.52755905511811,
+     "max_nc_limit": 35.0,
+     "pressure_ok": true,
+     "max_dp_limit_inwg": 0.2,
+     "rationale": {
+      "catalog_valid": true,
+      "noise_compliant": true,
+      "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+      "pressure_ok": true,
+      "pressure_basis": "catalog total-pressure loss; system losses not included",
+      "jet_collision_screening": "No geometric T50-envelope overlap flagged; collision not verified",
+      "t50_l_screening_pass": false,
+      "table4_airflow_compliant": true,
+      "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+      "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+      "terminal_velocity_status": "unresolved",
+      "rule_statuses": {
+       "R-TL-BAND": "supported",
+       "R-CHAR-L": "supported",
+       "R-MIN-THROW": "removed",
+       "R-NC": "engineer_decision",
+       "R-NECK-VEL": "engineer_decision",
+       "R-DP": "engineer_decision",
+       "R-AREA": "engineer_decision",
+       "R-TABLE4": "supported",
+       "R-TERMINAL-VELOCITY": "unresolved",
+       "R-NC-SPACING": "pending_verification",
+       "R-JET-COLLISION": "not_implemented",
+       "R-HEATING-OVERHEAD": "not_implemented",
+       "R-VAV": "not_implemented",
+       "R-THROW-OPPOSITE-WALLS": "supported",
+       "R-PROCEDURE": "supported",
+       "R-NC-BASIS": "unresolved"
+      },
+      "unresolved_or_unimplemented_rules": [
+       "R-TERMINAL-VELOCITY",
+       "R-NC-SPACING",
+       "R-JET-COLLISION",
+       "R-HEATING-OVERHEAD",
+       "R-VAV",
+       "R-NC-BASIS"
+      ],
+      "engineering_decision_rules": [
+       "R-NC",
+       "R-NECK-VEL",
+       "R-DP",
+       "R-AREA"
+      ],
+      "adpi_verified": false,
+      "source_refs": [
+       "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+       "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+       "ASHRAE Fundamentals 2017 Ch.20"
+      ],
+      "quantity": 1,
+      "summary": "Selected 1 × 18\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+      "tl_band": [
+       0.7,
+       1.3
+      ],
+      "violated_rules": [
+       "R-TL-BAND"
+      ]
+     }
+    },
+    "positions_m": [
+     [
+      3.0,
+      2.5
+     ]
+    ],
+    "positions_ft": [
+     [
+      9.84251968503937,
+      8.202099737532809
+     ]
+    ],
+    "performance": {
+     "model": "CCD-18",
+     "size_label": "18\"",
+     "qty": 1,
+     "cfm_per_unit": 600.0,
+     "neck_velocity_fpm": 339.0,
+     "neck_area_ft2": 1.77,
+     "throw_t50_ft": 13.4,
+     "throw_t100_ft": 8.4,
+     "pressure_drop_inwg": 0.0404,
+     "nc_estimated": 20.0,
+     "spacing_max_ft": 38.3,
+     "wall_offset_ft": 8.2,
+     "warnings": [
+      "T50/L screening 1.36–1.63 outside band 0.7-1.3"
+     ],
+     "kind": "round",
+     "nc_label": "<20",
+     "rows": 1,
+     "cols": 1,
+     "char_L_ft": 8.2,
+     "adpi_ratio": 1.63,
+     "adpi_ratio_min": 1.36,
+     "adpi_ok": false,
+     "score": 874.92,
+     "delta_t_f": 15.432098765432098,
+     "delta_t_limit_f": 25.52755905511811,
+     "max_nc_limit": 35.0,
+     "pressure_ok": true,
+     "max_dp_limit_inwg": 0.2,
+     "rationale": {
+      "catalog_valid": true,
+      "noise_compliant": true,
+      "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+      "pressure_ok": true,
+      "pressure_basis": "catalog total-pressure loss; system losses not included",
+      "jet_collision_screening": "No geometric T50-envelope overlap flagged; collision not verified",
+      "t50_l_screening_pass": false,
+      "table4_airflow_compliant": true,
+      "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+      "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+      "terminal_velocity_status": "unresolved",
+      "rule_statuses": {
+       "R-TL-BAND": "supported",
+       "R-CHAR-L": "supported",
+       "R-MIN-THROW": "removed",
+       "R-NC": "engineer_decision",
+       "R-NECK-VEL": "engineer_decision",
+       "R-DP": "engineer_decision",
+       "R-AREA": "engineer_decision",
+       "R-TABLE4": "supported",
+       "R-TERMINAL-VELOCITY": "unresolved",
+       "R-NC-SPACING": "pending_verification",
+       "R-JET-COLLISION": "not_implemented",
+       "R-HEATING-OVERHEAD": "not_implemented",
+       "R-VAV": "not_implemented",
+       "R-THROW-OPPOSITE-WALLS": "supported",
+       "R-PROCEDURE": "supported",
+       "R-NC-BASIS": "unresolved"
+      },
+      "unresolved_or_unimplemented_rules": [
+       "R-TERMINAL-VELOCITY",
+       "R-NC-SPACING",
+       "R-JET-COLLISION",
+       "R-HEATING-OVERHEAD",
+       "R-VAV",
+       "R-NC-BASIS"
+      ],
+      "engineering_decision_rules": [
+       "R-NC",
+       "R-NECK-VEL",
+       "R-DP",
+       "R-AREA"
+      ],
+      "adpi_verified": false,
+      "source_refs": [
+       "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+       "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+       "ASHRAE Fundamentals 2017 Ch.20"
+      ],
+      "quantity": 1,
+      "summary": "Selected 1 × 18\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+      "tl_band": [
+       0.7,
+       1.3
+      ],
+      "violated_rules": [
+       "R-TL-BAND"
+      ]
+     }
+    },
+    "wall_clearance_ok": true,
+    "spacing_ok": true,
+    "failure_kind": "no_fully_compliant_option",
+    "fallback_available": true,
+    "warnings": [
+     "T50/L screening 1.36–1.63 outside band 0.7-1.3"
+    ],
+    "errors": [
+     "No candidate meets all T50/L, Table 4, pressure, and acoustic screening criteria.",
+     "Selected 1 × 18\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit."
+    ]
+   }
+  },
+  "layout_em_L": {
+   "ok": {
+    "success": false,
+    "geometry": {
+     "vertices": [
+      [
+       0.0,
+       0.0
+      ],
+      [
+       8.0,
+       0.0
+      ],
+      [
+       8.0,
+       4.0
+      ],
+      [
+       4.0,
+       4.0
+      ],
+      [
+       4.0,
+       7.0
+      ],
+      [
+       0.0,
+       7.0
+      ]
+     ],
+     "height_m": 2.8,
+     "closed": true,
+     "closure_gap_m": 0.0,
+     "input_errors": []
+    },
+    "requested_quantity": 4,
+    "recommended_quantity": 4,
+    "placed_quantity": 2,
+    "required_cfm": 900,
+    "actual_total_cfm": 900,
+    "selected_model": {
+     "model": "CCD-16",
+     "size_label": "16\"",
+     "qty": 2,
+     "cfm_per_unit": 450.0,
+     "neck_velocity_fpm": 321.4,
+     "neck_area_ft2": 1.4,
+     "throw_t50_ft": 11.6,
+     "throw_t100_ft": 7.4,
+     "pressure_drop_inwg": 0.0499,
+     "nc_estimated": 20.0,
+     "spacing_max_ft": 33.3,
+     "wall_offset_ft": 4.9,
+     "warnings": [
+      "T50/L screening 0.89–2.37 outside band 0.7-1.3",
+      "Potential jet interaction between diffusers 1 and 2: center distance 13.23 ft is less than the T50 envelope sum 23.29 ft; direction and occupied-zone velocity are not verified."
+     ],
+     "kind": "round",
+     "nc_label": "<20",
+     "rows": 1,
+     "cols": 2,
+     "char_L_ft": 4.92,
+     "adpi_ratio": 2.37,
+     "adpi_ratio_min": 0.89,
+     "adpi_ok": false,
+     "score": 1113.59,
+     "delta_t_f": 10.288065843621398,
+     "delta_t_limit_f": 23.55905511811023,
+     "max_nc_limit": 35.0,
+     "pressure_ok": true,
+     "max_dp_limit_inwg": 0.2,
+     "rationale": {
+      "catalog_valid": true,
+      "noise_compliant": true,
+      "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+      "pressure_ok": true,
+      "pressure_basis": "catalog total-pressure loss; system losses not included",
+      "jet_collision_screening": "Potential overlap flagged; direction and occupied-zone velocity not verified",
+      "t50_l_screening_pass": false,
+      "table4_airflow_compliant": true,
+      "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+      "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+      "terminal_velocity_status": "unresolved",
+      "rule_statuses": {
+       "R-TL-BAND": "supported",
+       "R-CHAR-L": "supported",
+       "R-MIN-THROW": "removed",
+       "R-NC": "engineer_decision",
+       "R-NECK-VEL": "engineer_decision",
+       "R-DP": "engineer_decision",
+       "R-AREA": "engineer_decision",
+       "R-TABLE4": "supported",
+       "R-TERMINAL-VELOCITY": "unresolved",
+       "R-NC-SPACING": "pending_verification",
+       "R-JET-COLLISION": "not_implemented",
+       "R-HEATING-OVERHEAD": "not_implemented",
+       "R-VAV": "not_implemented",
+       "R-THROW-OPPOSITE-WALLS": "supported",
+       "R-PROCEDURE": "supported",
+       "R-NC-BASIS": "unresolved"
+      },
+      "unresolved_or_unimplemented_rules": [
+       "R-TERMINAL-VELOCITY",
+       "R-NC-SPACING",
+       "R-JET-COLLISION",
+       "R-HEATING-OVERHEAD",
+       "R-VAV",
+       "R-NC-BASIS"
+      ],
+      "engineering_decision_rules": [
+       "R-NC",
+       "R-NECK-VEL",
+       "R-DP",
+       "R-AREA"
+      ],
+      "adpi_verified": false,
+      "source_refs": [
+       "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+       "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+       "ASHRAE Fundamentals 2017 Ch.20"
+      ],
+      "quantity": 2,
+      "summary": "Selected 2 × 16\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+      "tl_band": [
+       0.7,
+       1.3
+      ],
+      "violated_rules": [
+       "R-TL-BAND",
+       "R-JET-COLLISION"
+      ]
+     }
+    },
+    "positions_m": [
+     [
+      4.0,
+      2.0
+     ],
+     [
+      2.0,
+      5.5
+     ]
+    ],
+    "positions_ft": [
+     [
+      13.123359580052492,
+      6.561679790026246
+     ],
+     [
+      6.561679790026246,
+      18.04461942257218
+     ]
+    ],
+    "performance": {
+     "model": "CCD-16",
+     "size_label": "16\"",
+     "qty": 2,
+     "cfm_per_unit": 450.0,
+     "neck_velocity_fpm": 321.4,
+     "neck_area_ft2": 1.4,
+     "throw_t50_ft": 11.6,
+     "throw_t100_ft": 7.4,
+     "pressure_drop_inwg": 0.0499,
+     "nc_estimated": 20.0,
+     "spacing_max_ft": 33.3,
+     "wall_offset_ft": 4.9,
+     "warnings": [
+      "T50/L screening 0.89–2.37 outside band 0.7-1.3",
+      "Potential jet interaction between diffusers 1 and 2: center distance 13.23 ft is less than the T50 envelope sum 23.29 ft; direction and occupied-zone velocity are not verified."
+     ],
+     "kind": "round",
+     "nc_label": "<20",
+     "rows": 1,
+     "cols": 2,
+     "char_L_ft": 4.92,
+     "adpi_ratio": 2.37,
+     "adpi_ratio_min": 0.89,
+     "adpi_ok": false,
+     "score": 1113.59,
+     "delta_t_f": 10.288065843621398,
+     "delta_t_limit_f": 23.55905511811023,
+     "max_nc_limit": 35.0,
+     "pressure_ok": true,
+     "max_dp_limit_inwg": 0.2,
+     "rationale": {
+      "catalog_valid": true,
+      "noise_compliant": true,
+      "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+      "pressure_ok": true,
+      "pressure_basis": "catalog total-pressure loss; system losses not included",
+      "jet_collision_screening": "Potential overlap flagged; direction and occupied-zone velocity not verified",
+      "t50_l_screening_pass": false,
+      "table4_airflow_compliant": true,
+      "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+      "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+      "terminal_velocity_status": "unresolved",
+      "rule_statuses": {
+       "R-TL-BAND": "supported",
+       "R-CHAR-L": "supported",
+       "R-MIN-THROW": "removed",
+       "R-NC": "engineer_decision",
+       "R-NECK-VEL": "engineer_decision",
+       "R-DP": "engineer_decision",
+       "R-AREA": "engineer_decision",
+       "R-TABLE4": "supported",
+       "R-TERMINAL-VELOCITY": "unresolved",
+       "R-NC-SPACING": "pending_verification",
+       "R-JET-COLLISION": "not_implemented",
+       "R-HEATING-OVERHEAD": "not_implemented",
+       "R-VAV": "not_implemented",
+       "R-THROW-OPPOSITE-WALLS": "supported",
+       "R-PROCEDURE": "supported",
+       "R-NC-BASIS": "unresolved"
+      },
+      "unresolved_or_unimplemented_rules": [
+       "R-TERMINAL-VELOCITY",
+       "R-NC-SPACING",
+       "R-JET-COLLISION",
+       "R-HEATING-OVERHEAD",
+       "R-VAV",
+       "R-NC-BASIS"
+      ],
+      "engineering_decision_rules": [
+       "R-NC",
+       "R-NECK-VEL",
+       "R-DP",
+       "R-AREA"
+      ],
+      "adpi_verified": false,
+      "source_refs": [
+       "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+       "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+       "ASHRAE Fundamentals 2017 Ch.20"
+      ],
+      "quantity": 2,
+      "summary": "Selected 2 × 16\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+      "tl_band": [
+       0.7,
+       1.3
+      ],
+      "violated_rules": [
+       "R-TL-BAND",
+       "R-JET-COLLISION"
+      ]
+     }
+    },
+    "wall_clearance_ok": true,
+    "spacing_ok": true,
+    "failure_kind": "no_fully_compliant_option",
+    "fallback_available": true,
+    "warnings": [
+     "T50/L screening 0.89–2.37 outside band 0.7-1.3",
+     "Potential jet interaction between diffusers 1 and 2: center distance 13.23 ft is less than the T50 envelope sum 23.29 ft; direction and occupied-zone velocity are not verified."
+    ],
+    "errors": [
+     "No candidate meets all T50/L, Table 4, pressure, and acoustic screening criteria.",
+     "Selected 2 × 16\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit."
+    ]
+   }
+  },
+  "evaluate_layout_4": {
+   "ok": [
+    {
+     "model": "CCD-12",
+     "size_label": "12\"",
+     "qty": 4,
+     "cfm_per_unit": 250.0,
+     "neck_velocity_fpm": 318.5,
+     "neck_area_ft2": 0.785,
+     "throw_t50_ft": 8.4,
+     "throw_t100_ft": 6.2,
+     "pressure_drop_inwg": 0.0288,
+     "nc_estimated": 20.0,
+     "spacing_max_ft": 23.9,
+     "wall_offset_ft": 5.0,
+     "warnings": [
+      "T50/L screening 0.93–1.67 outside band 0.7-1.3",
+      "Potential jet interaction between diffusers 1 and 2: center distance 10.00 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified.",
+      "Potential jet interaction between diffusers 1 and 3: center distance 10.00 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified.",
+      "Potential jet interaction between diffusers 1 and 4: center distance 14.14 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified.",
+      "Potential jet interaction between diffusers 2 and 3: center distance 14.14 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified.",
+      "Potential jet interaction between diffusers 2 and 4: center distance 10.00 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified.",
+      "Potential jet interaction between diffusers 3 and 4: center distance 10.00 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified."
+     ],
+     "kind": "round",
+     "nc_label": "<20",
+     "rows": 2,
+     "cols": 2,
+     "char_L_ft": 5.0,
+     "adpi_ratio": 1.67,
+     "adpi_ratio_min": 0.93,
+     "adpi_ok": false,
+     "score": 1046.3,
+     "delta_t_f": 10.0,
+     "delta_t_limit_f": 26,
+     "max_nc_limit": 35.0,
+     "pressure_ok": true,
+     "max_dp_limit_inwg": 0.2,
+     "rationale": {
+      "catalog_valid": true,
+      "noise_compliant": true,
+      "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+      "pressure_ok": true,
+      "pressure_basis": "catalog total-pressure loss; system losses not included",
+      "jet_collision_screening": "Potential overlap flagged; direction and occupied-zone velocity not verified",
+      "t50_l_screening_pass": false,
+      "table4_airflow_compliant": true,
+      "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+      "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+      "terminal_velocity_status": "unresolved",
+      "rule_statuses": {
+       "R-TL-BAND": "supported",
+       "R-CHAR-L": "supported",
+       "R-MIN-THROW": "removed",
+       "R-NC": "engineer_decision",
+       "R-NECK-VEL": "engineer_decision",
+       "R-DP": "engineer_decision",
+       "R-AREA": "engineer_decision",
+       "R-TABLE4": "supported",
+       "R-TERMINAL-VELOCITY": "unresolved",
+       "R-NC-SPACING": "pending_verification",
+       "R-JET-COLLISION": "not_implemented",
+       "R-HEATING-OVERHEAD": "not_implemented",
+       "R-VAV": "not_implemented",
+       "R-THROW-OPPOSITE-WALLS": "supported",
+       "R-PROCEDURE": "supported",
+       "R-NC-BASIS": "unresolved"
+      },
+      "unresolved_or_unimplemented_rules": [
+       "R-TERMINAL-VELOCITY",
+       "R-NC-SPACING",
+       "R-JET-COLLISION",
+       "R-HEATING-OVERHEAD",
+       "R-VAV",
+       "R-NC-BASIS"
+      ],
+      "engineering_decision_rules": [
+       "R-NC",
+       "R-NECK-VEL",
+       "R-DP",
+       "R-AREA"
+      ],
+      "adpi_verified": false,
+      "source_refs": [
+       "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+       "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+       "ASHRAE Fundamentals 2017 Ch.20"
+      ],
+      "quantity": 4,
+      "summary": "Selected 4 × 12\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+      "tl_band": [
+       0.7,
+       1.3
+      ],
+      "violated_rules": [
+       "R-TL-BAND",
+       "R-JET-COLLISION"
+      ]
+     }
+    },
+    [
+     {
+      "model": "CCD-12",
+      "size_label": "12\"",
+      "qty": 4,
+      "cfm_per_unit": 250.0,
+      "neck_velocity_fpm": 318.5,
+      "neck_area_ft2": 0.785,
+      "throw_t50_ft": 8.4,
+      "throw_t100_ft": 6.2,
+      "pressure_drop_inwg": 0.0288,
+      "nc_estimated": 20.0,
+      "spacing_max_ft": 23.9,
+      "wall_offset_ft": 5.0,
+      "warnings": [
+       "T50/L screening 0.93–1.67 outside band 0.7-1.3",
+       "Potential jet interaction between diffusers 1 and 2: center distance 10.00 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 1 and 3: center distance 10.00 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 1 and 4: center distance 14.14 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 2 and 3: center distance 14.14 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 2 and 4: center distance 10.00 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 3 and 4: center distance 10.00 ft is less than the T50 envelope sum 16.74 ft; direction and occupied-zone velocity are not verified."
+      ],
+      "kind": "round",
+      "nc_label": "<20",
+      "rows": 2,
+      "cols": 2,
+      "char_L_ft": 5.0,
+      "adpi_ratio": 1.67,
+      "adpi_ratio_min": 0.93,
+      "adpi_ok": false,
+      "score": 1046.3,
+      "delta_t_f": 10.0,
+      "delta_t_limit_f": 26,
+      "max_nc_limit": 35.0,
+      "pressure_ok": true,
+      "max_dp_limit_inwg": 0.2,
+      "rationale": {
+       "catalog_valid": true,
+       "noise_compliant": true,
+       "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+       "pressure_ok": true,
+       "pressure_basis": "catalog total-pressure loss; system losses not included",
+       "jet_collision_screening": "Potential overlap flagged; direction and occupied-zone velocity not verified",
+       "t50_l_screening_pass": false,
+       "table4_airflow_compliant": true,
+       "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+       "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+       "terminal_velocity_status": "unresolved",
+       "rule_statuses": {
+        "R-TL-BAND": "supported",
+        "R-CHAR-L": "supported",
+        "R-MIN-THROW": "removed",
+        "R-NC": "engineer_decision",
+        "R-NECK-VEL": "engineer_decision",
+        "R-DP": "engineer_decision",
+        "R-AREA": "engineer_decision",
+        "R-TABLE4": "supported",
+        "R-TERMINAL-VELOCITY": "unresolved",
+        "R-NC-SPACING": "pending_verification",
+        "R-JET-COLLISION": "not_implemented",
+        "R-HEATING-OVERHEAD": "not_implemented",
+        "R-VAV": "not_implemented",
+        "R-THROW-OPPOSITE-WALLS": "supported",
+        "R-PROCEDURE": "supported",
+        "R-NC-BASIS": "unresolved"
+       },
+       "unresolved_or_unimplemented_rules": [
+        "R-TERMINAL-VELOCITY",
+        "R-NC-SPACING",
+        "R-JET-COLLISION",
+        "R-HEATING-OVERHEAD",
+        "R-VAV",
+        "R-NC-BASIS"
+       ],
+       "engineering_decision_rules": [
+        "R-NC",
+        "R-NECK-VEL",
+        "R-DP",
+        "R-AREA"
+       ],
+       "adpi_verified": false,
+       "source_refs": [
+        "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+        "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+        "ASHRAE Fundamentals 2017 Ch.20"
+       ],
+       "quantity": 4,
+       "summary": "Selected 4 × 12\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+       "tl_band": [
+        0.7,
+        1.3
+       ],
+       "violated_rules": [
+        "R-TL-BAND",
+        "R-JET-COLLISION"
+       ]
+      }
+     },
+     {
+      "model": "CCD-10",
+      "size_label": "10\"",
+      "qty": 4,
+      "cfm_per_unit": 250.0,
+      "neck_velocity_fpm": 458.7,
+      "neck_area_ft2": 0.545,
+      "throw_t50_ft": 9.6,
+      "throw_t100_ft": 6.6,
+      "pressure_drop_inwg": 0.0792,
+      "nc_estimated": 20.0,
+      "spacing_max_ft": 27.4,
+      "wall_offset_ft": 5.0,
+      "warnings": [
+       "T50/L screening 1.07–1.92 outside band 0.7-1.3",
+       "Potential jet interaction between diffusers 1 and 2: center distance 10.00 ft is less than the T50 envelope sum 19.17 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 1 and 3: center distance 10.00 ft is less than the T50 envelope sum 19.17 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 1 and 4: center distance 14.14 ft is less than the T50 envelope sum 19.17 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 2 and 3: center distance 14.14 ft is less than the T50 envelope sum 19.17 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 2 and 4: center distance 10.00 ft is less than the T50 envelope sum 19.17 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 3 and 4: center distance 10.00 ft is less than the T50 envelope sum 19.17 ft; direction and occupied-zone velocity are not verified."
+      ],
+      "kind": "round",
+      "nc_label": "<20",
+      "rows": 2,
+      "cols": 2,
+      "char_L_ft": 5.0,
+      "adpi_ratio": 1.92,
+      "adpi_ratio_min": 1.07,
+      "adpi_ok": false,
+      "score": 1102.53,
+      "delta_t_f": 10.0,
+      "delta_t_limit_f": 26,
+      "max_nc_limit": 35.0,
+      "pressure_ok": true,
+      "max_dp_limit_inwg": 0.2,
+      "rationale": {
+       "catalog_valid": true,
+       "noise_compliant": true,
+       "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+       "pressure_ok": true,
+       "pressure_basis": "catalog total-pressure loss; system losses not included",
+       "jet_collision_screening": "Potential overlap flagged; direction and occupied-zone velocity not verified",
+       "t50_l_screening_pass": false,
+       "table4_airflow_compliant": true,
+       "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+       "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+       "terminal_velocity_status": "unresolved",
+       "rule_statuses": {
+        "R-TL-BAND": "supported",
+        "R-CHAR-L": "supported",
+        "R-MIN-THROW": "removed",
+        "R-NC": "engineer_decision",
+        "R-NECK-VEL": "engineer_decision",
+        "R-DP": "engineer_decision",
+        "R-AREA": "engineer_decision",
+        "R-TABLE4": "supported",
+        "R-TERMINAL-VELOCITY": "unresolved",
+        "R-NC-SPACING": "pending_verification",
+        "R-JET-COLLISION": "not_implemented",
+        "R-HEATING-OVERHEAD": "not_implemented",
+        "R-VAV": "not_implemented",
+        "R-THROW-OPPOSITE-WALLS": "supported",
+        "R-PROCEDURE": "supported",
+        "R-NC-BASIS": "unresolved"
+       },
+       "unresolved_or_unimplemented_rules": [
+        "R-TERMINAL-VELOCITY",
+        "R-NC-SPACING",
+        "R-JET-COLLISION",
+        "R-HEATING-OVERHEAD",
+        "R-VAV",
+        "R-NC-BASIS"
+       ],
+       "engineering_decision_rules": [
+        "R-NC",
+        "R-NECK-VEL",
+        "R-DP",
+        "R-AREA"
+       ],
+       "adpi_verified": false,
+       "source_refs": [
+        "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+        "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+        "ASHRAE Fundamentals 2017 Ch.20"
+       ],
+       "quantity": 4,
+       "summary": "Selected 4 × 10\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+       "tl_band": [
+        0.7,
+        1.3
+       ],
+       "violated_rules": [
+        "R-TL-BAND",
+        "R-JET-COLLISION"
+       ]
+      }
+     },
+     {
+      "model": "CCD-8",
+      "size_label": "8\"",
+      "qty": 4,
+      "cfm_per_unit": 250.0,
+      "neck_velocity_fpm": 716.3,
+      "neck_area_ft2": 0.349,
+      "throw_t50_ft": 8.0,
+      "throw_t100_ft": 6.0,
+      "pressure_drop_inwg": 0.1036,
+      "nc_estimated": 25.7,
+      "spacing_max_ft": 22.9,
+      "wall_offset_ft": 5.0,
+      "warnings": [
+       "T50/L screening 0.89–1.60 outside band 0.7-1.3",
+       "Potential jet interaction between diffusers 1 and 2: center distance 10.00 ft is less than the T50 envelope sum 16.00 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 1 and 3: center distance 10.00 ft is less than the T50 envelope sum 16.00 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 1 and 4: center distance 14.14 ft is less than the T50 envelope sum 16.00 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 2 and 3: center distance 14.14 ft is less than the T50 envelope sum 16.00 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 2 and 4: center distance 10.00 ft is less than the T50 envelope sum 16.00 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 3 and 4: center distance 10.00 ft is less than the T50 envelope sum 16.00 ft; direction and occupied-zone velocity are not verified."
+      ],
+      "kind": "round",
+      "nc_label": "26",
+      "rows": 2,
+      "cols": 2,
+      "char_L_ft": 5.0,
+      "adpi_ratio": 1.6,
+      "adpi_ratio_min": 0.89,
+      "adpi_ok": false,
+      "score": 1033.56,
+      "delta_t_f": 10.0,
+      "delta_t_limit_f": 26,
+      "max_nc_limit": 35.0,
+      "pressure_ok": true,
+      "max_dp_limit_inwg": 0.2,
+      "rationale": {
+       "catalog_valid": true,
+       "noise_compliant": true,
+       "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+       "pressure_ok": true,
+       "pressure_basis": "catalog total-pressure loss; system losses not included",
+       "jet_collision_screening": "Potential overlap flagged; direction and occupied-zone velocity not verified",
+       "t50_l_screening_pass": false,
+       "table4_airflow_compliant": true,
+       "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+       "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+       "terminal_velocity_status": "unresolved",
+       "rule_statuses": {
+        "R-TL-BAND": "supported",
+        "R-CHAR-L": "supported",
+        "R-MIN-THROW": "removed",
+        "R-NC": "engineer_decision",
+        "R-NECK-VEL": "engineer_decision",
+        "R-DP": "engineer_decision",
+        "R-AREA": "engineer_decision",
+        "R-TABLE4": "supported",
+        "R-TERMINAL-VELOCITY": "unresolved",
+        "R-NC-SPACING": "pending_verification",
+        "R-JET-COLLISION": "not_implemented",
+        "R-HEATING-OVERHEAD": "not_implemented",
+        "R-VAV": "not_implemented",
+        "R-THROW-OPPOSITE-WALLS": "supported",
+        "R-PROCEDURE": "supported",
+        "R-NC-BASIS": "unresolved"
+       },
+       "unresolved_or_unimplemented_rules": [
+        "R-TERMINAL-VELOCITY",
+        "R-NC-SPACING",
+        "R-JET-COLLISION",
+        "R-HEATING-OVERHEAD",
+        "R-VAV",
+        "R-NC-BASIS"
+       ],
+       "engineering_decision_rules": [
+        "R-NC",
+        "R-NECK-VEL",
+        "R-DP",
+        "R-AREA"
+       ],
+       "adpi_verified": false,
+       "source_refs": [
+        "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+        "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+        "ASHRAE Fundamentals 2017 Ch.20"
+       ],
+       "quantity": 4,
+       "summary": "Selected 4 × 8\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+       "tl_band": [
+        0.7,
+        1.3
+       ],
+       "violated_rules": [
+        "R-TL-BAND",
+        "R-JET-COLLISION"
+       ]
+      }
+     },
+     {
+      "model": "CCD-6",
+      "size_label": "6\"",
+      "qty": 4,
+      "cfm_per_unit": 250.0,
+      "neck_velocity_fpm": 1275.5,
+      "neck_area_ft2": 0.196,
+      "throw_t50_ft": 7.4,
+      "throw_t100_ft": 5.4,
+      "pressure_drop_inwg": 0.319,
+      "nc_estimated": 36.5,
+      "spacing_max_ft": 21.1,
+      "wall_offset_ft": 5.0,
+      "warnings": [
+       "ΔP 0.319 > limit 0.20 in.wg",
+       "Noise NC 37 above limit 35",
+       "T50/L screening 0.82–1.48 outside band 0.7-1.3",
+       "Potential jet interaction between diffusers 1 and 2: center distance 10.00 ft is less than the T50 envelope sum 14.76 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 1 and 3: center distance 10.00 ft is less than the T50 envelope sum 14.76 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 1 and 4: center distance 14.14 ft is less than the T50 envelope sum 14.76 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 2 and 3: center distance 14.14 ft is less than the T50 envelope sum 14.76 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 2 and 4: center distance 10.00 ft is less than the T50 envelope sum 14.76 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 3 and 4: center distance 10.00 ft is less than the T50 envelope sum 14.76 ft; direction and occupied-zone velocity are not verified."
+      ],
+      "kind": "round",
+      "nc_label": "37",
+      "rows": 2,
+      "cols": 2,
+      "char_L_ft": 5.0,
+      "adpi_ratio": 1.48,
+      "adpi_ratio_min": 0.82,
+      "adpi_ok": false,
+      "score": 1059.81,
+      "delta_t_f": 10.0,
+      "delta_t_limit_f": 26,
+      "max_nc_limit": 35.0,
+      "pressure_ok": false,
+      "max_dp_limit_inwg": 0.2,
+      "rationale": {
+       "catalog_valid": true,
+       "noise_compliant": false,
+       "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+       "pressure_ok": false,
+       "pressure_basis": "catalog total-pressure loss; system losses not included",
+       "jet_collision_screening": "Potential overlap flagged; direction and occupied-zone velocity not verified",
+       "t50_l_screening_pass": false,
+       "table4_airflow_compliant": true,
+       "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+       "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+       "terminal_velocity_status": "unresolved",
+       "rule_statuses": {
+        "R-TL-BAND": "supported",
+        "R-CHAR-L": "supported",
+        "R-MIN-THROW": "removed",
+        "R-NC": "engineer_decision",
+        "R-NECK-VEL": "engineer_decision",
+        "R-DP": "engineer_decision",
+        "R-AREA": "engineer_decision",
+        "R-TABLE4": "supported",
+        "R-TERMINAL-VELOCITY": "unresolved",
+        "R-NC-SPACING": "pending_verification",
+        "R-JET-COLLISION": "not_implemented",
+        "R-HEATING-OVERHEAD": "not_implemented",
+        "R-VAV": "not_implemented",
+        "R-THROW-OPPOSITE-WALLS": "supported",
+        "R-PROCEDURE": "supported",
+        "R-NC-BASIS": "unresolved"
+       },
+       "unresolved_or_unimplemented_rules": [
+        "R-TERMINAL-VELOCITY",
+        "R-NC-SPACING",
+        "R-JET-COLLISION",
+        "R-HEATING-OVERHEAD",
+        "R-VAV",
+        "R-NC-BASIS"
+       ],
+       "engineering_decision_rules": [
+        "R-NC",
+        "R-NECK-VEL",
+        "R-DP",
+        "R-AREA"
+       ],
+       "adpi_verified": false,
+       "source_refs": [
+        "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+        "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+        "ASHRAE Fundamentals 2017 Ch.20"
+       ],
+       "quantity": 4,
+       "summary": "Selected 4 × 6\" for T50/L screening review; NC exceeds the configured limit; catalog total pressure exceeds the configured limit.",
+       "tl_band": [
+        0.7,
+        1.3
+       ],
+       "violated_rules": [
+        "R-DP",
+        "R-NC",
+        "R-TL-BAND",
+        "R-JET-COLLISION"
+       ]
+      }
+     },
+     {
+      "model": "CCD-24",
+      "size_label": "24\"",
+      "qty": 4,
+      "cfm_per_unit": 250.0,
+      "neck_velocity_fpm": 79.6,
+      "neck_area_ft2": 3.14,
+      "throw_t50_ft": 15.0,
+      "throw_t100_ft": 10.0,
+      "pressure_drop_inwg": 0.045,
+      "nc_estimated": 20.0,
+      "spacing_max_ft": 42.9,
+      "wall_offset_ft": 5.0,
+      "warnings": [
+       "Neck velocity 80 FPM outside catalog table (300-1600)",
+       "T50/L screening 1.67–3.00 outside band 0.7-1.3",
+       "Potential jet interaction between diffusers 1 and 2: center distance 10.00 ft is less than the T50 envelope sum 30.00 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 1 and 3: center distance 10.00 ft is less than the T50 envelope sum 30.00 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 1 and 4: center distance 14.14 ft is less than the T50 envelope sum 30.00 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 2 and 3: center distance 14.14 ft is less than the T50 envelope sum 30.00 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 2 and 4: center distance 10.00 ft is less than the T50 envelope sum 30.00 ft; direction and occupied-zone velocity are not verified.",
+       "Potential jet interaction between diffusers 3 and 4: center distance 10.00 ft is less than the T50 envelope sum 30.00 ft; direction and occupied-zone velocity are not verified."
+      ],
+      "kind": "round",
+      "nc_label": "<20",
+      "rows": 2,
+      "cols": 2,
+      "char_L_ft": 5.0,
+      "adpi_ratio": 3.0,
+      "adpi_ratio_min": 1.67,
+      "adpi_ok": false,
+      "score": 1373.47,
+      "delta_t_f": 10.0,
+      "delta_t_limit_f": 26,
+      "max_nc_limit": 35.0,
+      "pressure_ok": true,
+      "max_dp_limit_inwg": 0.2,
+      "rationale": {
+       "catalog_valid": false,
+       "noise_compliant": true,
+       "acoustic_verification_status": "Acoustic screening; catalog NC basis unresolved",
+       "pressure_ok": true,
+       "pressure_basis": "catalog total-pressure loss; system losses not included",
+       "jet_collision_screening": "Potential overlap flagged; direction and occupied-zone velocity not verified",
+       "t50_l_screening_pass": false,
+       "table4_airflow_compliant": true,
+       "verification_status": "ASHRAE-aligned screening; ADPI not verified",
+       "t50_l_basis": "T0.25/L cooling screening; catalog T50 used as ~50 fpm proxy",
+       "terminal_velocity_status": "unresolved",
+       "rule_statuses": {
+        "R-TL-BAND": "supported",
+        "R-CHAR-L": "supported",
+        "R-MIN-THROW": "removed",
+        "R-NC": "engineer_decision",
+        "R-NECK-VEL": "engineer_decision",
+        "R-DP": "engineer_decision",
+        "R-AREA": "engineer_decision",
+        "R-TABLE4": "supported",
+        "R-TERMINAL-VELOCITY": "unresolved",
+        "R-NC-SPACING": "pending_verification",
+        "R-JET-COLLISION": "not_implemented",
+        "R-HEATING-OVERHEAD": "not_implemented",
+        "R-VAV": "not_implemented",
+        "R-THROW-OPPOSITE-WALLS": "supported",
+        "R-PROCEDURE": "supported",
+        "R-NC-BASIS": "unresolved"
+       },
+       "unresolved_or_unimplemented_rules": [
+        "R-TERMINAL-VELOCITY",
+        "R-NC-SPACING",
+        "R-JET-COLLISION",
+        "R-HEATING-OVERHEAD",
+        "R-VAV",
+        "R-NC-BASIS"
+       ],
+       "engineering_decision_rules": [
+        "R-NC",
+        "R-NECK-VEL",
+        "R-DP",
+        "R-AREA"
+       ],
+       "adpi_verified": false,
+       "source_refs": [
+        "ASHRAE HVAC Applications 2015 Ch.57 pp.57.5-57.6",
+        "ASHRAE HVAC Applications 2015 Ch.48 p.48.3",
+        "ASHRAE Fundamentals 2017 Ch.20"
+       ],
+       "quantity": 4,
+       "summary": "Selected 4 × 24\" for T50/L screening review; NC meets the configured limit; catalog total pressure meets the configured limit.",
+       "tl_band": [
+        0.7,
+        1.3
+       ],
+       "violated_rules": [
+        "R-CATALOG-RANGE",
+        "R-TL-BAND",
+        "R-JET-COLLISION"
+       ]
+      }
+     }
+    ]
+   ]
+  },
+  "retorno_1000": {
+   "ok": {
+    "quantity": 1,
+    "size_in": 24,
+    "cfm_each": 1000.0,
+    "velocity_fpm": 318.4713375796178,
+    "pressure_drop_inwg": 0.0146624203821656,
+    "nc": 19.0,
+    "nc_label": "<20",
+    "warnings": []
+   }
+  },
+  "vcd_300x200": {
+   "ok": {
+    "nominal_width_mm": 300,
+    "nominal_height_mm": 200,
+    "casing_width_mm": 304.0,
+    "casing_height_mm": 204.0,
+    "face_width_mm": 304.0,
+    "face_height_mm": 204.0,
+    "damper_count": 1,
+    "per_damper_width_mm": 300.0,
+    "blade_count": 2,
+    "drive_arm_x_mm": 52,
+    "custom_size": false,
+    "warnings": []
+   }
+  },
+  "vcd_1250x610": {
+   "ok": {
+    "nominal_width_mm": null,
+    "nominal_height_mm": 700,
+    "casing_width_mm": 1254,
+    "casing_height_mm": 704.0,
+    "face_width_mm": 1254,
+    "face_height_mm": 704.0,
+    "damper_count": 1,
+    "per_damper_width_mm": 1250,
+    "blade_count": 7,
+    "drive_arm_x_mm": 252,
+    "custom_size": true,
+    "warnings": [
+     "custom size - confirm with manufacturer"
+    ]
+   }
+  },
+  "rvcd_10_400": {
+   "ok": {
+    "pressure_class": "LP",
+    "diameter_in": 10,
+    "frame_allowance_in": 2.0,
+    "overall_length_in": 12.0,
+    "velocity_fpm": 733.3859777674537,
+    "pressure_drop_inwg": 0.007209391716220746,
+    "leakage_cfm_at_1_inwg": 2.5132741228718345,
+    "pressure_drop_estimated": true,
+    "leakage_estimated": true,
+    "warning": null
+   }
+  },
+  "rvcd_14_1200_mp": {
+   "erro": [
+    "ValueError",
+    "RVCD pressure class must be LP or HP"
+   ]
+  },
+  "porta_500": {
+   "ok": {
+    "width_in": 24,
+    "height_in": 12,
+    "min_cfm": 370,
+    "max_cfm": 665,
+    "area_in2": 288,
+    "range_midpoint_cfm": 517.5,
+    "notes": [
+     "The 30×18 CFM range (280–700) overlaps inconsistently with 30×12 (470–845); confirm catalogue selection with the manufacturer.",
+     "The 48×24 horizontal size is 48 inches; the catalogue's 36-inch label is a typo."
+    ]
+   }
+  },
+  "porta_3000": {
+   "ok": {
+    "width_in": 48,
+    "height_in": 30,
+    "min_cfm": 1540,
+    "max_cfm": 3080,
+    "area_in2": 1440,
+    "range_midpoint_cfm": 2310.0,
+    "notes": [
+     "The 30×18 CFM range (280–700) overlaps inconsistently with 30×12 (470–845); confirm catalogue selection with the manufacturer.",
+     "The 48×24 horizontal size is 48 inches; the catalogue's 36-inch label is a typo."
+    ]
+   }
+  },
+  "posicionar_motor": {
+   "ok": {
+    "success": true,
+    "requested_quantity": 4,
+    "positions_m": [
+     [
+      1.5,
+      1.25
+     ],
+     [
+      4.5,
+      1.25
+     ],
+     [
+      1.5,
+      3.75
+     ],
+     [
+      4.5,
+      3.75
+     ]
+    ],
+    "errors": [],
+    "wall_clearance_ok": true,
+    "spacing_ok": true,
+    "throw_t50_m": null
+   }
+  },
+  "posicionar_legado_qtd0": {
+   "ok": {
+    "success": false,
+    "requested_quantity": 0,
+    "positions_m": [],
+    "errors": [
+     "Requested diffuser quantity must be positive."
+    ],
+    "wall_clearance_ok": false,
+    "spacing_ok": false,
+    "throw_t50_m": null
+   }
+  },
+  "posicionar_legado_folga_negativa": {
+   "ok": {
+    "success": false,
+    "requested_quantity": 4,
+    "positions_m": [],
+    "errors": [
+     "Wall clearance and diffuser spacing must be finite and non-negative."
+    ],
+    "wall_clearance_ok": false,
+    "spacing_ok": false,
+    "throw_t50_m": null
+   }
+  },
+  "relatorio_texto": {
+   "ok": "═══ Al-Andalosia Diffuser Selection — office_priv ═══\nManufacturer         : AL-ANDALOSIA FOR AIR OUTLETS\nVerification status   : ASHRAE-aligned screening; ADPI not verified\nEngineering basis     : ASHRAE HVAC Applications Ch.57; Fundamentals Ch.20\nTotal airflow        : 800 CFM\nRoom Dimensions      : 20.0 × 20.0 × 10.0 ft (400 ft²)\nAir changes per hour : 12.0 ACH\nLayout               : 1 × 1  (L = 10.0 ft)\nT50/L screening     : 1.53 – 1.53  (screening band 0.7–1.2, review; ADPI not verified)\nSupply ΔT            : n/a\n\n── Selected Al-Andalosia Model ──\nModel / Type         : CCD-20 (20\")\nQuantity             : 1 unit(s)\nAirflow per diffuser : 800 CFM\nNeck velocity        : 367 FPM\nCatalog Total ΔP     : 0.0567 in.wg (OK; limit 0.20 in.wg)\nPressure basis       : catalog total-pressure loss; not system static pressure\nSound (catalog)      : NC <20\nThrow Range (T100-T50): 10.0 - 15.3 ft\nMax Spacing          : 43.8 ft\n⚠ T50/L screening 1.53–1.53 outside band 0.7-1.2"
+  }
+ }
+}
