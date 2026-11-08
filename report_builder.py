@@ -919,8 +919,6 @@ CABLE_AMPACITY = {
 CABLE_DERATING = 0.80
 MIN_POWER_CABLE_MM2 = 2.5   # practical minimum for fixed power wiring
 
-
-
 # ─────────────────────────── helpers ────────────────────────────
 def _fmt_pipe(text):
     """'1/2"-2' -> '1/2" × 2' ; '3/8”' -> '3/8"' ; None -> ''."""
