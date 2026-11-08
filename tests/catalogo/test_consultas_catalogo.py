@@ -1,4 +1,5 @@
 # Consultas do motor ao esquema único: desempates, versão e mensagens de banco inválido.
+import shutil
 import sqlite3
 from pathlib import Path
 
@@ -20,7 +21,9 @@ def catalogo():
     banco = RAIZ / "hvac_equipment.sqlite"
     if not banco.exists():
         pytest.skip("hvac_equipment.sqlite ausente")
-    return abrir_catalogo(banco)
+    cat = abrir_catalogo(banco)
+    yield cat
+    cat.conn.close()
 
 
 def test_aquecimento_qdmt_escolhe_menor_bs_interno_no_empate(catalogo):
@@ -61,3 +64,36 @@ def test_versao_vem_do_metadata(catalogo):
         esperado = con.execute(
             "SELECT value FROM _metadata WHERE key = 'catalogo_sha256'").fetchone()[0]
     assert catalogo.versao() == esperado
+
+
+def test_rooftop_sem_ruido_publicado_devolve_zero_sem_falhar(tmp_path):
+    banco = tmp_path / "catalogo.sqlite"
+    shutil.copy(RAIZ / "hvac_equipment.sqlite", banco)
+    con = sqlite3.connect(banco)
+    try:
+        con.execute("""
+            DELETE FROM ponto_desempenho WHERE tipo = 'ruido' AND modelo_id IN (
+                SELECT m.id FROM modelo_equipamento m JOIN familia f ON f.id = m.familia_id
+                WHERE f.codigo = 'rooftop')""")
+        con.commit()
+        restantes = con.execute("""
+            SELECT COUNT(*) FROM ponto_desempenho p
+            JOIN modelo_equipamento m ON m.id = p.modelo_id
+            JOIN familia f ON f.id = m.familia_id
+            WHERE f.codigo = 'rooftop' AND p.tipo = 'ruido'""").fetchone()[0]
+    finally:
+        con.close()
+    assert restantes == 0
+
+    rooftop = familia_por_codigo("rooftop")
+    catalogo = abrir_catalogo(banco)
+    try:
+        r = selecionar(catalogo, Requisitos(180000, 130000, 6000, 0.8), ["rooftop"])
+    finally:
+        catalogo.conn.close()
+
+    assert r.avisos == []
+    assert r.versao_catalogo and len(r.versao_catalogo) == 64
+    assert r.linhas and all(l.catalogo == rooftop.rotulo for l in r.linhas)
+    assert any(l.adequado for l in r.linhas)
+    assert all(l.ruido_dba == 0 for l in r.linhas)

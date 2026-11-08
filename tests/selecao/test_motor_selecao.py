@@ -1,4 +1,5 @@
 # Motor de seleção: margens, velocidade, validação das entradas e rastreabilidade.
+import sqlite3
 from pathlib import Path
 
 import pytest
@@ -8,8 +9,12 @@ import ductdx
 from ductdx.catalogo.consultas import abrir_catalogo
 from ductdx.selecao import (
     FAMILIAS,
+    ModeloCatalogo,
+    PontoResfriamento,
+    PontoVazao,
     Requisitos,
     aplicar_margens,
+    familia_por_codigo,
     resolver_velocidade,
     selecionar,
     temperatura_de_catalogo,
@@ -78,3 +83,53 @@ def test_resultado_traz_versao_e_entradas(banco_padrao):
         catalogo.conn.close()
     assert (r.versao_motor, r.requisitos) == (ductdx.__version__, req)
     assert r.versao_catalogo == versao and len(versao) == 64
+
+
+MODELO_FALSO = ModeloCatalogo(
+    id=1, id_origem=1, modelo="TESTE-24", classe_kbtu=24.0, capacidade_nominal_btuh=24000.0,
+    esp_max_inwg=None, alimentacao="220V", modelo_interno="I", modelo_externo="E",
+    dimensoes_internas_mm="", eer_btu_wh=None)
+
+
+class CatalogoRooftopFalha:
+    """Catalogo falso: qdmt responde; a consulta de modelos do rooftop falha como em banco sem a tabela."""
+
+    def versao(self):
+        return "falso"
+
+    def modelos(self, familia):
+        if familia.codigo == "rooftop":
+            raise sqlite3.OperationalError("no such table: rooftop_equipment_model")
+        return [MODELO_FALSO]
+
+    def velocidades(self, familia, modelo):
+        return {"High"}
+
+    def marca_anomalias(self, familia):
+        return False
+
+    def ponto_resfriamento(self, familia, modelo, velocidade, bs_externo_c, esp_inwg):
+        return PontoResfriamento(30000.0, 22000.0, 0.16)
+
+    def tem_ponto_anomalo(self, familia, modelo, velocidade, bs_externo_c):
+        return False
+
+    def ponto_vazao(self, familia, modelo, velocidade, esp_inwg):
+        return PontoVazao(0.16, 1000.0)
+
+    def ruido_dba(self, familia, modelo, velocidade, esp_inwg):
+        return 40.0
+
+    def capacidade_aquecimento_btuh(self, familia, modelo, velocidade, esp_inwg, condicao="2/1°C"):
+        return 30000.0
+
+
+def test_familia_indisponivel_vira_aviso_e_as_outras_seguem():
+    r = selecionar(CatalogoRooftopFalha(), Requisitos(24000, 18000, 800, 0.16),
+                   ["qdmt", "rooftop"])
+    aviso = (f"{familia_por_codigo('rooftop').rotulo} catalog unavailable: "
+             "no such table: rooftop_equipment_model")
+    assert r.avisos == [aviso]
+    assert [(l.modelo, l.catalogo) for l in r.linhas] == [
+        ("TESTE-24", familia_por_codigo("qdmt").rotulo)]
+    assert r.linhas[0].adequado

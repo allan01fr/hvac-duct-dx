@@ -56,7 +56,3 @@ def test_referencia_registra_os_modelos_escolhidos_hoje():
     sem = next(l for l in r["qdmt_sem_pontos"]["linhas"] if l["modelo"] == "53QDMT12-718")
     assert (sem["pontuacao"], sem["velocidade"], sem["motivos"]) == (
         9999.0, "—", "fan speed High unavailable in catalog")
-    assert r["rooftop_sem_ruido"]["avisos"] == [(
-        "Carrier Rooftops 50TFF/50TJS/50TJ (5–25 Ton) catalog unavailable: "
-        "no such table: rooftop_sound_level")]
-    assert len(r["rooftop_sem_ruido"]["linhas"]) == 23
