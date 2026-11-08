@@ -1204,6 +1204,16 @@ class App(QMainWindow):
         if self.cart:  # ceiling inputs may have changed -> refresh cart checks
             self._render_cart()
 
+    # Results-table sorting: column -> (index in the result row tuple, kind).
+    # Sorting is done on the row data (not the cell text) so "1,234" sorts
+    # numerically and the row index <-> data mapping used elsewhere is kept.
+    RESULT_SORT_COLS = {
+        1: (15, "text"), 2: (2, "text"), 3: (3, "num"), 4: (4, "num"),
+        5: (5, "num"), 6: (13, "num"), 7: (16, "num"), 8: (6, "num"),
+        9: (11, "num"),
+    }
+    RESULT_SORT_FIRST_DESC = {7}  # EER: best (highest) first
+
     def _sorted_for_display(self, rows):
         col, desc = getattr(self, "_result_sort", (-1, False))
         spec = self.RESULT_SORT_COLS.get(col)

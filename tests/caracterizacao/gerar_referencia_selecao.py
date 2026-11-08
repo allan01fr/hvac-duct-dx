@@ -1,4 +1,5 @@
-# Gera a referência da seleção UMA vez a partir do main.py atual. Nunca regenerar.
+# CONGELADO (proveniência): gerado uma única vez no commit 0cf3fa1, a partir de main.py@1fa5f7a.
+# Não roda mais desde a Tarefa 5 (executar_legado foi removido) e a referência nunca é regenerada.
 import hashlib
 import json
 import subprocess
