@@ -61,6 +61,14 @@ except ImportError:
 
 import report_builder
 import ui_shell
+from ductdx.selecao import (
+    FAMILIAS,
+    CatalogoPorPrefixo,
+    ParametrosForro,
+    Requisitos,
+    familia_por_rotulo,
+    selecionar,
+)
 from ductdx.selecao.esp import (
     ACCESSORIES_PRESSURE,
     ESP_PRESETS,
@@ -138,6 +146,13 @@ def _cad_diffuser_records(cad_room, positions_m, throw_t50_m):
 # ═══════════════════════════════════════════════════════════════
 
 DB = Path(__file__).with_name("hvac_equipment.sqlite")
+
+# Rótulo do combo "Phase" da GUI -> valor de Requisitos.fase
+FASE_POR_ROTULO = {
+    "Any": "qualquer",
+    "1-Phase (220-240V)": "monofasico",
+    "3-Phase (380-420V)": "trifasico",
+}
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -486,11 +501,8 @@ class App(QMainWindow):
     # (equipment_model, cooling_performance, ...) built by build_db.py from
     # hvac_catalog.xlsx. 'miraco_' = the miraco_* tables built by
     # miraco_loader.py from Carrier_Miraco_HVAC_Selection_Database_v3.xlsx.
-    CATALOGS = (
-        ("All Catalogs", None),
-        ("QDMT Duct Split (12–60 kBTU)", ""),
-        ("Miraco 50UB/38BB/40AB (55–300 MBH)", "miraco_"),
-        ("Carrier Rooftops 50TFF/50TJS/50TJ (5–25 Ton)", "rooftop_"),
+    CATALOGS = (("All Catalogs", None),) + tuple(
+        (f.rotulo, f.prefixo_legado) for f in FAMILIAS
     )
 
     def __init__(self):
@@ -513,7 +525,7 @@ class App(QMainWindow):
         self.ocr = None
         self.raw = ""
         self.selected_row = -1
-        self._speed_cache = {}
+        self.catalogo = CatalogoPorPrefixo(self.conn)
         # ── [NEW] Selection Cart ──
         self.cart = {}  # {system_label: {model, catalog, loads...}}
         self._auto_system_n = 0
@@ -1124,6 +1136,7 @@ class App(QMainWindow):
             c = float(self.cfm.text().replace(",", "") or 0)
             esp = float(self.esp.text().replace(",", "") or 0)
             h = float(self.heat.text().replace(",", "") or 0)
+            max_sound = float(self.max_sound.text() or 0)
         except (TypeError, ValueError):
             self.status.setText("❌ Enter valid numeric values.")
             return
@@ -1138,438 +1151,58 @@ class App(QMainWindow):
             self.summary.setText("Waiting for valid HAP load and airflow values.")
             return
 
-        reqb = b * (1 + self.capm.value() / 100)
-        reqs = s * (1 + self.safm.value() / 100) if s > 0 else 0
-        reqc = c * (1 + self.afm.value() / 100)
         outdoor = int(self.outdoor_temp.currentText())
         fan_pref = self.fan_speed.currentText()
-        phase_filter = self.phase.currentText()
-        max_sound = float(self.max_sound.text() or 0)
-
-        db_outdoor = (
-            35
-            if outdoor <= 35
-            else (43 if outdoor <= 43 else (46 if outdoor <= 46 else 52))
-        )
+        cp = self._ceiling_params()
+        try:
+            requisitos = Requisitos(
+                carga_total_btuh=b,
+                carga_sensivel_btuh=s,
+                vazao_cfm=c,
+                esp_inwg=esp,
+                carga_aquecimento_btuh=h,
+                margem_capacidade_pct=self.capm.value(),
+                margem_sensivel_pct=self.safm.value(),
+                margem_vazao_pct=self.afm.value(),
+                temperatura_externa_c=outdoor,
+                velocidade=fan_pref,
+                fase=FASE_POR_ROTULO[self.phase.currentText()],
+                ruido_max_dba=max_sound,
+                forro=ParametrosForro(
+                    vao_mm=cp["void"],
+                    folga_mm=cp["clearance"],
+                    dreno_m=cp["drain_run"],
+                    reprovar_se_nao_cabe=self.ceiling_enforce.isChecked(),
+                ),
+            )
+        except ValueError:
+            self.status.setText("❌ Enter valid numeric values.")
+            return
 
         family_label = self.catalog_family.currentText()
-        prefixes = next((p for lbl, p in self.CATALOGS if lbl == family_label), None)
-        if prefixes is None:  # 'Both Catalogs'
-            active = [(lbl, p) for lbl, p in self.CATALOGS if p is not None]
-        else:
-            active = [(family_label, prefixes)]
+        familias = (
+            None
+            if family_label == "All Catalogs"
+            else [familia_por_rotulo(family_label).codigo]
+        )
+        r = selecionar(self.catalogo, requisitos, familias)
 
-        rows = []
-        catalog_warnings = []
-        for catalog_label, prefix in active:
-            try:
-                rows.extend(
-                    self._search_family(
-                        prefix,
-                        catalog_label,
-                        reqb,
-                        reqs,
-                        reqc,
-                        esp,
-                        h,
-                        fan_pref,
-                        phase_filter,
-                        db_outdoor,
-                        max_sound,
-                    )
-                )
-            except sqlite3.OperationalError as exc:
-                message = f"{catalog_label} catalog unavailable: {exc}"
-                logging.getLogger(__name__).warning(message)
-                catalog_warnings.append(message)
-
-        rows.sort(key=lambda x: (not x[0], x[1]))
         best_only = self.best_match_only.isChecked()
-        self.render(rows, reqb, reqs, reqc, esp, fan_pref, outdoor, best_only)
-        if catalog_warnings:
-            self.status.setText("; ".join(catalog_warnings))
+        self.render(
+            [l.como_linha_legada() for l in r.linhas],
+            r.requeridos.total_btuh,
+            r.requeridos.sensivel_btuh,
+            r.requeridos.vazao_cfm,
+            esp,
+            fan_pref,
+            outdoor,
+            best_only,
+        )
+        if r.avisos:
+            self.status.setText("; ".join(r.avisos))
             self.status.setStyleSheet("color: #fbbf24;")
         if self.cart:  # ceiling inputs may have changed -> refresh cart checks
             self._render_cart()
-
-    def _available_speeds(self, table_name, equipment_model_id):
-        """Cache distinct fan speeds per table and equipment model."""
-        cache_key = (table_name, equipment_model_id)
-        if cache_key not in self._speed_cache:
-            self._speed_cache[cache_key] = {
-                row[0]
-                for row in self.conn.execute(
-                    f"""SELECT DISTINCT fan_speed FROM {table_name}
-                        WHERE equipment_model_id=? AND fan_speed IS NOT NULL""",
-                    (equipment_model_id,),
-                )
-                if row[0]
-            }
-        return self._speed_cache[cache_key]
-
-    def _resolve_fan_speed(
-        self, airflow_table, cooling_table, equipment_model_id, requested_speed
-    ):
-        """Resolve the requested fan speed against the published catalog speeds.
-
-        Some catalogs, including Carrier Miraco, publish only ``High``. If the
-        user requests ``Medium`` or ``Low`` and that speed is unavailable, use
-        ``High`` instead of treating the model as having zero airflow/capacity.
-        Returns ``(actual_speed, fallback_reason)``.
-        """
-        requested = requested_speed if requested_speed != "Any" else "High"
-        available = self._available_speeds(
-            airflow_table, equipment_model_id
-        ) | self._available_speeds(cooling_table, equipment_model_id)
-
-        if not available:
-            return None, f"fan speed {requested} unavailable in catalog"
-        if requested in available:
-            return requested, ""
-        if "High" in available:
-            return (
-                "High",
-                f"fan fallback {requested} → High (requested speed not published)",
-            )
-
-        for candidate in ("Medium", "Low"):
-            if candidate in available:
-                return candidate, f"fan fallback {requested} → {candidate}"
-        actual = min(available)
-        return actual, f"fan fallback {requested} → {actual}"
-
-    def _anomaly_filter(self, table_name):
-        """Return a compatible SQL filter for optional is_anomaly columns."""
-        try:
-            columns = {
-                row[1]
-                for row in self.conn.execute(
-                    f"PRAGMA table_info({table_name})"
-                ).fetchall()
-            }
-        except sqlite3.OperationalError:
-            return "", False
-        if "is_anomaly" in columns:
-            return " AND COALESCE(is_anomaly, 0)=0", True
-        return "", False
-
-    def _search_family(
-        self,
-        prefix,
-        catalog_label,
-        reqb,
-        reqs,
-        reqc,
-        esp,
-        h,
-        fan_pref,
-        phase_filter,
-        db_outdoor,
-        max_sound,
-    ):
-        """Runs the selection query against one table set (prefix ''
-        or 'miraco_') and returns rows in the same shape search() used
-        to build directly, plus a trailing catalog_label for display
-        and Word-report table lookup."""
-        t_eq = f"{prefix}equipment_model"
-        t_cool = f"{prefix}cooling_performance"
-        t_air = f"{prefix}airflow_point"
-        t_sound = f"{prefix}sound_level"
-        t_heat = f"{prefix}heating_performance"
-        cap_margin = 1 + self.capm.value() / 100
-        reqh = h * cap_margin if h > 0 else 0
-        anomaly_filter, has_anomaly_flag = self._anomaly_filter(t_cool)
-        # Conservative lookup: prefer the first catalog point AT OR ABOVE
-        # the design value (higher ESP / hotter outdoor air = less
-        # capacity and airflow); only fall back to the nearest point below
-        # when the catalog has nothing above.
-        EPS = 1e-9
-
-        rows = []
-        models = self.conn.execute(f"""
-            SELECT id, system_model, nominal_class_kbtu, rated_cooling_btuh,
-                   max_esp_inwg, power_supply, indoor_model, outdoor_model,
-                   indoor_dimensions_mm, eer_btu_wh
-            FROM {t_eq} ORDER BY nominal_class_kbtu
-        """).fetchall()
-
-        for (
-            mid,
-            model,
-            klass,
-            rated_cap,
-            maxesp,
-            power,
-            indoor,
-            outdoor_model,
-            dims,
-            eer,
-        ) in models:
-            if phase_filter != "Any":
-                if "1-Phase" in phase_filter and not (power or "").startswith("220"):
-                    continue
-                if "3-Phase" in phase_filter and not (power or "").startswith("380"):
-                    continue
-
-            fan_to_use, fan_fallback_reason = self._resolve_fan_speed(
-                t_air, t_cool, mid, fan_pref
-            )
-            if fan_to_use is None:
-                airflow_metadata = {
-                    "equipment_model_id": mid,
-                    "model": model,
-                    "catalog": catalog_label,
-                    "catalog_prefix": prefix,
-                    "fan_speed_requested": fan_pref,
-                    "fan_speed_resolved": None,
-                    "airflow_cfm": None,
-                    "airflow_esp_inwg": None,
-                    "requested_esp_inwg": esp,
-                    "airflow_source": "airflow point unavailable",
-                    "airflow_provenance": "unknown_unverified",
-                }
-                rows.append(
-                    (
-                        False,
-                        9999.0,
-                        model,
-                        klass,
-                        rated_cap,
-                        0,
-                        0,
-                        power,
-                        indoor,
-                        outdoor_model,
-                        dims,
-                        0,
-                        "—",
-                        0,
-                        fan_fallback_reason,
-                        catalog_label,
-                        eer,
-                        airflow_metadata,
-                    )
-                )
-                continue
-
-            cap_row = self.conn.execute(
-                f"""
-                SELECT total_capacity_btuh, sensible_capacity_btuh, esp_inwg
-                FROM {t_cool}
-                WHERE equipment_model_id=? AND fan_speed=?
-                  AND indoor_db_c=27 AND indoor_wb_c=19
-                  {anomaly_filter}
-                ORDER BY (outdoor_db_c < ?), ABS(outdoor_db_c - ?),
-                         (esp_inwg < ?), ABS(esp_inwg - ?) LIMIT 1
-            """,
-                (mid, fan_to_use, db_outdoor - EPS, db_outdoor, esp - EPS, esp),
-            ).fetchone()
-            anomaly_excluded = False
-            if not cap_row and fan_to_use != "High":
-                cap_row = self.conn.execute(
-                    f"""
-                    SELECT total_capacity_btuh, sensible_capacity_btuh, esp_inwg
-                    FROM {t_cool}
-                    WHERE equipment_model_id=? AND fan_speed='High'
-                      AND indoor_db_c=27 AND indoor_wb_c=19
-                      {anomaly_filter}
-                    ORDER BY (outdoor_db_c < ?), ABS(outdoor_db_c - ?),
-                             (esp_inwg < ?), ABS(esp_inwg - ?) LIMIT 1
-                """,
-                    (mid, db_outdoor - EPS, db_outdoor, esp - EPS, esp),
-                ).fetchone()
-                if cap_row:
-                    fan_to_use = "High"
-
-            if not cap_row and has_anomaly_flag:
-                anomaly_excluded = (
-                    self.conn.execute(
-                        f"""
-                    SELECT 1 FROM {t_cool}
-                    WHERE equipment_model_id=? AND fan_speed=?
-                      AND indoor_db_c=27 AND indoor_wb_c=19
-                      AND COALESCE(is_anomaly, 0)=1
-                    ORDER BY (outdoor_db_c < ?), ABS(outdoor_db_c - ?)
-                    LIMIT 1
-                """,
-                        (mid, fan_to_use, db_outdoor - EPS, db_outdoor),
-                    ).fetchone()
-                    is not None
-                )
-
-            cap = cap_row[0] if cap_row else rated_cap
-            sens_cap = cap_row[1] if cap_row else 0
-
-            flow_row = self.conn.execute(
-                f"""
-                SELECT esp_inwg, airflow_cfm FROM {t_air}
-                WHERE equipment_model_id=? AND fan_speed=?
-                ORDER BY (esp_inwg < ?), ABS(esp_inwg - ?) LIMIT 1
-            """,
-                (mid, fan_to_use, esp - EPS, esp),
-            ).fetchone()
-            airflow_point_cfm = (
-                float(flow_row[1])
-                if flow_row and flow_row[1] is not None else None)
-            if airflow_point_cfm is not None and airflow_point_cfm <= 0:
-                airflow_point_cfm = None
-            airflow_metadata = {
-                "equipment_model_id": mid,
-                "model": model,
-                "catalog": catalog_label,
-                "catalog_prefix": prefix,
-                "fan_speed_requested": fan_pref,
-                "fan_speed_resolved": fan_to_use,
-                "airflow_cfm": airflow_point_cfm,
-                "airflow_esp_inwg": (
-                    float(flow_row[0])
-                    if flow_row and flow_row[0] is not None else None),
-                "requested_esp_inwg": esp,
-                "airflow_source": (
-                    f"{catalog_label} airflow-point table"
-                    if flow_row else "airflow point unavailable"),
-                "airflow_provenance": (
-                    "unverified_catalog_point"
-                    if airflow_point_cfm is not None
-                    else "unknown_unverified"),
-            }
-            flow = airflow_metadata["airflow_cfm"] or 0
-
-            sound_row = self.conn.execute(
-                f"""
-                SELECT sound_dba FROM {t_sound}
-                WHERE equipment_model_id=? AND fan_speed=?
-                ORDER BY (esp_inwg < ?), ABS(esp_inwg - ?) LIMIT 1
-            """,
-                (mid, fan_to_use, esp - EPS, esp),
-            ).fetchone()
-            sound = sound_row[0] if sound_row else 0
-
-            try:
-                heat_row = self.conn.execute(
-                    f"""
-                    SELECT total_capacity_btuh FROM {t_heat}
-                    WHERE equipment_model_id=? AND fan_speed=? AND outdoor_condition=?
-                    ORDER BY (esp_inwg < ?), ABS(esp_inwg - ?) LIMIT 1
-                """,
-                    (mid, fan_to_use, "2/1°C", esp - EPS, esp),
-                ).fetchone()
-            except sqlite3.Error:
-                heat_row = None
-            heat_cap = heat_row[0] if heat_row else 0
-
-            reasons = []
-            if fan_fallback_reason:
-                reasons.append(fan_fallback_reason)
-            if anomaly_excluded:
-                reasons.append(
-                    "cooling value flagged anomaly and excluded from selection"
-                )
-            if (
-                cap_row
-                and esp > 0
-                and cap_row[2] is not None
-                and cap_row[2] < esp - 0.005
-            ):
-                reasons.append(
-                    f"catalog data only to {cap_row[2]:.2f} in.wg "
-                    f"(required {esp:.2f}) - verify"
-                )
-            ok_cap = (cap >= reqb if reqb else True) and not anomaly_excluded
-            ok_sens = sens_cap >= reqs if reqs else True
-            ok_flow = flow >= reqc if reqc else True
-            # max_esp_inwg is NULL for equipment lines that don't publish an
-            # external static pressure rating (e.g. Carrier Miraco 50UB/
-            # 38BB/40AB) — treat that as "no ESP limit on record" rather
-            # than failing every match.
-            ok_esp = (maxesp is None) or (maxesp >= esp)
-            ok_sound = (sound <= max_sound) if (max_sound > 0 and sound > 0) else True
-            ok_heat = (heat_cap >= reqh) if reqh else True
-
-            if not ok_cap and not anomaly_excluded:
-                reasons.append(f"capacity short {reqb - cap:,.0f}")
-            if not ok_sens:
-                reasons.append(f"sensible short {reqs - sens_cap:,.0f}")
-            if not ok_flow:
-                reasons.append(f"airflow short {reqc - flow:,.0f}")
-            if not ok_esp:
-                reasons.append(f"ESP max {maxesp:.2f}")
-            if not ok_heat:
-                reasons.append(f"heating short {reqh - heat_cap:,.0f}")
-
-            # Ceiling void: always warns; only disqualifies when the box is ticked
-            ceil_h = (report_builder.parse_dims(dims) or (0, 0, 0))[1]
-            _cp = self._ceiling_params()
-            ceil_ck = report_builder.check_ceiling_void(
-                ceil_h, _cp["void"], _cp["clearance"], _cp["drain_run"]
-            )
-            ok_ceiling = True
-            if ceil_ck["level"] in ("error", "warn"):
-                reasons.append(
-                    "ceiling void: unit too tall"
-                    if ceil_ck["level"] == "error"
-                    else "ceiling void: tight (see Ceiling Void Check)"
-                )
-                if ceil_ck["level"] == "error" and self.ceiling_enforce.isChecked():
-                    ok_ceiling = False
-
-            ok = (
-                ok_cap
-                and ok_sens
-                and ok_flow
-                and ok_esp
-                and ok_sound
-                and ok_heat
-                and ok_ceiling
-            )
-            if ok:
-                reasons.append("✅ Meets all requirements")
-
-            # Score = how much this unit exceeds the requirement (closer to 0 = better fit).
-            # Ranking uses this so the NEAREST suitable unit is chosen first,
-            # instead of always picking the largest available unit.
-            score = 0.0
-            if reqb:
-                score += max(0.0, (cap - reqb) / reqb) * 100
-            if reqc:
-                score += max(0.0, (flow - reqc) / reqc) * 50
-            if reqs and sens_cap:
-                score += max(0.0, (sens_cap - reqs) / reqs) * 30
-
-            rows.append(
-                (
-                    ok,
-                    score,
-                    model,
-                    klass,
-                    cap,
-                    sens_cap,
-                    flow,
-                    power,
-                    indoor,
-                    outdoor_model,
-                    dims,
-                    sound,
-                    fan_to_use,
-                    heat_cap,
-                    "; ".join(reasons),
-                    catalog_label,
-                    eer,
-                    airflow_metadata,
-                )
-            )
-
-        return rows
-
-    # Results-table sorting: column -> (index in the result row tuple, kind).
-    # Sorting is done on the row data (not the cell text) so "1,234" sorts
-    # numerically and the row index <-> data mapping used elsewhere is kept.
-    RESULT_SORT_COLS = {
-        1: (15, "text"), 2: (2, "text"), 3: (3, "num"), 4: (4, "num"),
-        5: (5, "num"), 6: (13, "num"), 7: (16, "num"), 8: (6, "num"),
-        9: (11, "num"),
-    }
-    RESULT_SORT_FIRST_DESC = {7}  # EER: best (highest) first
 
     def _sorted_for_display(self, rows):
         col, desc = getattr(self, "_result_sort", (-1, False))

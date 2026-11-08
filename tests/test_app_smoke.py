@@ -137,3 +137,16 @@ def test_drop_filters_and_window_accepts_drops(qapp):
     assert accepted(ROOT / "G01.RTF")
     assert accepted(ROOT / "project.ductdx")
     assert not accepted(ROOT / "requirements.txt")
+
+
+@pytest.mark.skipif(not (ROOT / "G01.RTF").exists(), reason="G01.RTF missing")
+def test_busca_da_gui_igual_ao_motor(qapp):
+    import main
+    from ductdx.selecao import Requisitos, selecionar
+    w = main.App()
+    w.btu.setText("24000"); w.sens.setText("18000"); w.cfm.setText("800")
+    w.esp.setText("0.16"); w.heat.setText("0")
+    w.catalog_family.setCurrentText("QDMT Duct Split (12–60 kBTU)")
+    w.search()
+    esperado = selecionar(w.catalogo, Requisitos(24000, 18000, 800, 0.16), ["qdmt"])
+    assert w._last_render[0] == [l.como_linha_legada() for l in esperado.linhas]

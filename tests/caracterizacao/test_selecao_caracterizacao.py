@@ -1,22 +1,19 @@
-# Caracterização da seleção DX: congela o comportamento atual do main.py.
+# Caracterização da seleção DX: o motor tem de reproduzir a referência congelada do main.py original.
 import json
 from pathlib import Path
 
 import pytest
 from casos_selecao import CASOS, caso_completo
-from execucao_selecao import executar_legado, executar_motor, preparar_banco
+from execucao_selecao import executar_motor, preparar_banco
 
 REFERENCIA = json.loads(
     (Path(__file__).parent / "referencia_selecao.json").read_text(encoding="utf-8"))
 
-IMPLEMENTACOES = {"legado": executar_legado, "motor": executar_motor}
 
-
-@pytest.mark.parametrize("impl", sorted(IMPLEMENTACOES))
 @pytest.mark.parametrize("caso", CASOS, ids=lambda c: c["nome"])
-def test_selecao_igual_a_referencia(caso, impl, tmp_path):
+def test_selecao_igual_a_referencia(caso, tmp_path):
     banco = preparar_banco(caso_completo(caso)["banco"], tmp_path / "b.sqlite")
-    assert IMPLEMENTACOES[impl](caso, banco) == REFERENCIA["casos"][caso["nome"]]
+    assert executar_motor(caso, banco) == REFERENCIA["casos"][caso["nome"]]
 
 
 def test_referencia_registra_os_modelos_escolhidos_hoje():

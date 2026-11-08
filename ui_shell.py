@@ -4,9 +4,9 @@ ui_shell.py
 Professional UI shell for the Duct DX Equipment Selector.
 
 This module ONLY builds widgets / layouts / styling. All backend logic
-(parse_hap, search, _search_family, cart, energy, exports ...) stays in
-main.py and is reached through the very same attribute names the old UI
-used (self.btu, self.sens, self.table, self.cart_table, self.status ...).
+(parse_hap, cart, energy, exports ...) stays in main.py (selection itself lives
+in ductdx.selecao) and is reached through the very same attribute names the old
+UI used (self.btu, self.sens, self.table, self.cart_table, self.status ...).
 
 Public API
 ----------
