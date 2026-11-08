@@ -2,3 +2,7 @@ extend-exclude = [
     ".archive/**",
     ".backup_*/**",
 ]
+
+# Código movido sem reescrita (Tarefa 12): o corpo de rules_tl_band fica idêntico ao original.
+[lint.per-file-ignores]
+"ductdx/difusores/regras.py" = ["RUF007"]

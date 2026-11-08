@@ -10,7 +10,10 @@ SUBPACOTES = ["ductdx", "ductdx.selecao", "ductdx.selecao.esp", "ductdx.selecao.
               "ductdx.selecao.catalogo", "ductdx.selecao.motor",
               "ductdx.catalogo", "ductdx.catalogo.esquema", "ductdx.catalogo.consultas",
               "ductdx.difusores.geometria_ambiente", "ductdx.difusores.motor_posicionamento",
-              "ductdx.difusores.adaptador_posicionamento", "ductdx.difusores.dados_catalogo"]   # ampliado nas Tarefas 9, 11 e 14
+              "ductdx.difusores.adaptador_posicionamento", "ductdx.difusores.dados_catalogo",
+              "ductdx.difusores.conversoes", "ductdx.difusores.regras", "ductdx.difusores.entrada",
+              "ductdx.difusores.geometria", "ductdx.difusores.catalogo_insuflamento",
+              "ductdx.difusores.sala", "ductdx.difusores.posicionamento"]   # ampliado nas Tarefas 9, 11 e 14
 # ductdx.catalogo.fontes.* pode usar pandas/openpyxl (exceção à regra), por isso fica fora da lista acima.
 
 def test_pacote_importa_sem_gui_nem_pandas():
