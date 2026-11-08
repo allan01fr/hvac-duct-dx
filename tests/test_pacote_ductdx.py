@@ -5,7 +5,9 @@ from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[1]
 PROIBIDOS = {"PySide6", "pandas", "docx"}
-SUBPACOTES = ["ductdx", "ductdx.selecao", "ductdx.selecao.esp", "ductdx.selecao.forro"]   # ampliado nas Tarefas 9, 11 e 14
+SUBPACOTES = ["ductdx", "ductdx.selecao", "ductdx.selecao.esp", "ductdx.selecao.forro",
+              "ductdx.selecao.familias", "ductdx.selecao.requisitos", "ductdx.selecao.resultado",
+              "ductdx.selecao.catalogo", "ductdx.selecao.catalogo_prefixo", "ductdx.selecao.motor"]   # ampliado nas Tarefas 9, 11 e 14
 
 def test_pacote_importa_sem_gui_nem_pandas():
     codigo = ("import importlib, sys\n"

@@ -7,6 +7,8 @@ from pathlib import Path
 from casos_selecao import caso_completo
 from legado_main import RAIZ, carregar_busca_legada
 
+from ductdx.selecao import CatalogoPorPrefixo, ParametrosForro, Requisitos, selecionar
+
 CAMPOS_LINHA = ("adequado", "pontuacao", "modelo", "classe_kbtu",
                 "capacidade_total_btuh", "capacidade_sensivel_btuh", "vazao_cfm",
                 "alimentacao", "modelo_interno", "modelo_externo",
@@ -88,3 +90,25 @@ def executar_legado(caso: dict, banco: Path) -> dict:
     app.conn.close()
     linhas = [dict(zip(CAMPOS_LINHA, linha)) for linha in capturado]
     return json.loads(json.dumps({"linhas": linhas, "avisos": avisos}))
+
+
+def executar_motor(caso: dict, banco: Path) -> dict:
+    c = caso_completo(caso)
+    margem_cap, margem_sens, margem_vazao = c["margens"]
+    req = Requisitos(
+        carga_total_btuh=c["total"], carga_sensivel_btuh=c["sensivel"],
+        vazao_cfm=c["vazao"], esp_inwg=c["esp"], carga_aquecimento_btuh=c["aquecimento"],
+        margem_capacidade_pct=margem_cap, margem_sensivel_pct=margem_sens,
+        margem_vazao_pct=margem_vazao, temperatura_externa_c=int(c["temperatura"]),
+        velocidade=c["velocidade"], fase=c["fase"], ruido_max_dba=float(c["ruido_max"]),
+        forro=ParametrosForro(vao_mm=c["forro_vao"], folga_mm=c["forro_folga"],
+                              dreno_m=c["forro_dreno"],
+                              reprovar_se_nao_cabe=c["forro_reprovar"]))
+    familia = c["familia"]
+    con = sqlite3.connect(banco)
+    try:
+        resultado = selecionar(CatalogoPorPrefixo(con), req, [familia] if familia else None)
+    finally:
+        con.close()
+    linhas = [dict(zip(CAMPOS_LINHA, l.como_linha_legada())) for l in resultado.linhas]
+    return json.loads(json.dumps({"linhas": linhas, "avisos": resultado.avisos}))

@@ -4,12 +4,12 @@ from pathlib import Path
 
 import pytest
 from casos_selecao import CASOS, caso_completo
-from execucao_selecao import executar_legado, preparar_banco
+from execucao_selecao import executar_legado, executar_motor, preparar_banco
 
 REFERENCIA = json.loads(
     (Path(__file__).parent / "referencia_selecao.json").read_text(encoding="utf-8"))
 
-IMPLEMENTACOES = {"legado": executar_legado}   # a Tarefa 4 acrescenta "motor"
+IMPLEMENTACOES = {"legado": executar_legado, "motor": executar_motor}
 
 
 @pytest.mark.parametrize("impl", sorted(IMPLEMENTACOES))
