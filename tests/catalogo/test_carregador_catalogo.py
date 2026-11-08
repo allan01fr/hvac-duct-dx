@@ -117,3 +117,9 @@ def test_fonte_ausente_falha_com_caminho(tmp_path):
     with pytest.raises(FileNotFoundError, match="Carrier_Miraco"):
         construir_banco(tmp_path, tmp_path / "x.sqlite")
     assert not (tmp_path / "x.sqlite").exists()
+
+
+def test_banco_reconstruido_fica_legivel_para_todos(tmp_path):
+    # mkstemp cria o arquivo com 0600; o banco final tem de ser 0644 como antes.
+    destino = construir_banco(DADOS, tmp_path / "hvac.sqlite")
+    assert destino.stat().st_mode & 0o777 == 0o644

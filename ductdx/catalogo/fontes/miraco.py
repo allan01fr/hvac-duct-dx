@@ -406,7 +406,7 @@ def ler_miraco(xlsx: Path) -> TabelasFamilia:
             f"main.py will exclude them from selection."
         )
     else:
-        LOGGER.warning(
+        LOGGER.info(
             f"[miraco_loader] No anomaly cells at design point "
             f"(WB={DESIGN_WB_C}, DB={DESIGN_DB_C}). "
             f"is_anomaly = 0 for all {len(cool_rows)} rows — expected, "

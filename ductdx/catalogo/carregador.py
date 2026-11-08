@@ -197,6 +197,7 @@ def construir_banco(pasta_dados: Path, destino: Path) -> Path:
             _gravar_metadados(conn, fontes)
             criar_visoes_compatibilidade(conn)
             conn.commit()
+        os.chmod(temporario, 0o644)  # mkstemp cria 0600; o banco final é legível por todos
         os.replace(temporario, destino)
     except BaseException:
         temporario.unlink(missing_ok=True)
