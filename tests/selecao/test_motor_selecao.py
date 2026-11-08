@@ -1,5 +1,6 @@
 # Motor de seleção: margens, velocidade, validação das entradas e rastreabilidade.
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 
 import pytest
@@ -21,7 +22,10 @@ RAIZ = Path(__file__).resolve().parents[2]
 
 @pytest.fixture
 def banco_padrao():
-    return RAIZ / "hvac_equipment.sqlite"
+    banco = RAIZ / "hvac_equipment.sqlite"
+    if not banco.exists():
+        pytest.skip("hvac_equipment.sqlite ausente")
+    return banco
 
 
 def test_aplicar_margens_usa_margem_de_capacidade_no_aquecimento():
@@ -68,5 +72,6 @@ def test_familias_batem_com_os_rotulos_da_gui():
 
 def test_resultado_traz_versao_e_entradas(banco_padrao):
     req = Requisitos(24000, 18000, 800, 0.16)
-    r = selecionar(CatalogoPorPrefixo(sqlite3.connect(banco_padrao)), req, ["qdmt"])
+    with closing(sqlite3.connect(banco_padrao)) as con:
+        r = selecionar(CatalogoPorPrefixo(con), req, ["qdmt"])
     assert (r.versao_motor, r.requisitos, r.versao_catalogo) == (ductdx.__version__, req, None)

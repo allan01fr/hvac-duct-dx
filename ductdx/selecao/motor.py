@@ -168,12 +168,8 @@ def _selecionar_familia(catalogo: Catalogo, familia: Familia, requisitos: Requis
         flow = airflow_metadata["airflow_cfm"] or 0
 
         sound = catalogo.ruido_dba(familia, modelo, fan_to_use, esp)
-        if sound is None:
-            sound = 0
 
         heat_cap = catalogo.capacidade_aquecimento_btuh(familia, modelo, fan_to_use, esp)
-        if heat_cap is None:
-            heat_cap = 0
 
         reasons = []
         if fan_fallback_reason:

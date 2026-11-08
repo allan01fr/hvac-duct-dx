@@ -136,7 +136,7 @@ class CatalogoPorPrefixo:
         """,
             (modelo.id, velocidade, esp_inwg - EPS, esp_inwg),
         ).fetchone()
-        return sound_row[0] if sound_row else None
+        return sound_row[0] if sound_row else 0
 
     def capacidade_aquecimento_btuh(self, familia, modelo, velocidade: str, esp_inwg: float,
                                     condicao: str = "2/1°C") -> float | None:
@@ -152,4 +152,4 @@ class CatalogoPorPrefixo:
             ).fetchone()
         except sqlite3.Error:
             heat_row = None
-        return heat_row[0] if heat_row else None
+        return heat_row[0] if heat_row else 0
