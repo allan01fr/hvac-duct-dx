@@ -43,12 +43,15 @@ Engineering assumptions
 
 from __future__ import annotations
 
+import logging
 import re
 from pathlib import Path
 
 import pandas as pd
 
 from ductdx.catalogo.fontes import TabelasFamilia
+
+LOGGER = logging.getLogger(__name__)
 
 KW_TO_BTUH = 3412.14
 
@@ -397,13 +400,13 @@ def ler_miraco(xlsx: Path) -> TabelasFamilia:
     # ─── 9) Build-time anomaly report ────────────────────────
     flagged = sum(row["is_anomaly"] for row in cool_rows)
     if _ANOMALY_AT_DESIGN:
-        print(
+        LOGGER.warning(
             f"[miraco_loader] {flagged} cooling row(s) flagged anomalous "
             f"at design point (WB={DESIGN_WB_C}, DB={DESIGN_DB_C}). "
             f"main.py will exclude them from selection."
         )
     else:
-        print(
+        LOGGER.warning(
             f"[miraco_loader] No anomaly cells at design point "
             f"(WB={DESIGN_WB_C}, DB={DESIGN_DB_C}). "
             f"is_anomaly = 0 for all {len(cool_rows)} rows — expected, "

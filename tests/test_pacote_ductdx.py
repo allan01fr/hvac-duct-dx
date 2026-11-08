@@ -36,7 +36,7 @@ def test_report_builder_usa_a_mesma_verificacao_de_forro():
 def test_fontes_do_catalogo_usam_pandas_mas_nao_gui_nem_docx():
     codigo = ("import importlib, sys\n"
               "for m in ['ductdx.catalogo.fontes.qdmt', 'ductdx.catalogo.fontes.miraco',\n"
-              "          'ductdx.catalogo.fontes.rooftop', 'ductdx.catalogo.fontes.ajustes_manuais']:\n"
+              "          'ductdx.catalogo.fontes.rooftop', 'ductdx.catalogo.fontes.ajustes_manuais',\n          'ductdx.catalogo.carregador']:\n"
               "    importlib.import_module(m)\n"
               "print(sorted(m for m in sys.modules if m.split('.')[0] in {'PySide6', 'docx'}))")
     saida = subprocess.run([sys.executable, "-c", codigo], cwd=RAIZ,

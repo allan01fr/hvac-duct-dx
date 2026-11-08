@@ -28,6 +28,15 @@ python3 -m compileall -q .
 
 The repository intentionally reports unresolved or unimplemented engineering topics instead of presenting them as verified results.
 
+## Catalog database
+
+`hvac_equipment.sqlite` is generated from the spreadsheets in `data/` by a single
+loader (`ductdx.catalogo.carregador`). Run `python build_db.py` to rebuild it
+(`--dry-run` builds and validates in a temporary file, `--data-dir` and `--db`
+override the paths). The file uses schema version 2 (`fabricante`, `familia`,
+`modelo_equipamento`, `ponto_desempenho`); the old table names (`equipment_model`,
+`miraco_*`, `rooftop_*`) are kept as read-only views.
+
 ## Manual equipment overrides
 
 The requested `53QDMT30-708` unit is included in `hvac_equipment.sqlite` as a

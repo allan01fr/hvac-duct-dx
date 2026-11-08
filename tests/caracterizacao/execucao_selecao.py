@@ -24,13 +24,12 @@ def preparar_banco(variante: str, destino: Path) -> Path:
         return destino
     con = sqlite3.connect(destino)
     if variante == "sem_pontos_12_718":
-        mid = con.execute(
-            "SELECT id FROM equipment_model WHERE system_model='53QDMT12-718'"
-        ).fetchone()[0]
-        for tabela in ("airflow_point", "cooling_performance"):
-            con.execute(f"DELETE FROM {tabela} WHERE equipment_model_id=?", (mid,))
+        con.execute(
+            "DELETE FROM ponto_desempenho WHERE tipo IN ('vazao', 'resfriamento') AND modelo_id = "
+            "(SELECT m.id FROM modelo_equipamento m JOIN familia f ON f.id = m.familia_id "
+            "WHERE f.codigo = 'qdmt' AND m.modelo_sistema = '53QDMT12-718')")
     elif variante == "sem_tabela_ruido_rooftop":
-        con.execute("DROP TABLE rooftop_sound_level")
+        con.execute("DROP VIEW rooftop_sound_level")
     else:
         raise ValueError(variante)
     con.commit()

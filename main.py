@@ -498,9 +498,9 @@ QCheckBox{color:#e5e7eb}
 
 class App(QMainWindow):
     # Display label -> table-name prefix. '' = the original QDMT tables
-    # (equipment_model, cooling_performance, ...) built by build_db.py from
-    # hvac_catalog.xlsx. 'miraco_' = the miraco_* tables built by
-    # miraco_loader.py from Carrier_Miraco_HVAC_Selection_Database_v3.xlsx.
+    # (equipment_model, cooling_performance, ...) are compatibility views over
+    # the v2 schema built by build_db.py (ductdx.catalogo.carregador); 'miraco_'
+    # and 'rooftop_' are the views of the other families.
     CATALOGS = (("All Catalogs", None),) + tuple(
         (f.rotulo, f.prefixo_legado) for f in FAMILIAS
     )
